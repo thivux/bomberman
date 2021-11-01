@@ -1,5 +1,3 @@
-package uet.oop.bomberman;
-
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -7,11 +5,11 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
-import uet.oop.bomberman.entities.Bomber;
-import uet.oop.bomberman.entities.Entity;
-import uet.oop.bomberman.entities.Grass;
-import uet.oop.bomberman.entities.Wall;
-import uet.oop.bomberman.graphics.Sprite;
+import entities.Bomber;
+import entities.Entity;
+import entities.Grass;
+import entities.Wall;
+import graphics.Sprite;
 
 import java.util.ArrayList;
 import java.util.List;
