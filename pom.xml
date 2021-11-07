@@ -57,7 +57,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>BombermanGame</mainClass>
+                            <mainClass>oop.bomberman.BombermanGame</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
