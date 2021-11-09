@@ -1,5 +1,6 @@
 package oop.bomberman.entities;
 
+
 import oop.bomberman.graphics.Sprite;
 
 import java.awt.*;
@@ -19,7 +20,7 @@ public abstract class Entity {
     protected float dY;
 
     //Khởi tạo đối tượng, chuyển từ tọa độ đơn vị sang tọa độ trong canvas
-    public Entity( int xUnit, int yUnit, ID id) {
+    public Entity(int xUnit, int yUnit, ID id) {
         x = xUnit;
         y = yUnit;
         this.id = id;
@@ -46,8 +47,7 @@ public abstract class Entity {
         return sprite;
     }
 
-    public void remove()
-    {
+    public void remove() {
         isRemoved = true;
     }
 

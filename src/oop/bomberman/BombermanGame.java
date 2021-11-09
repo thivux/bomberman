@@ -107,7 +107,7 @@ public class BombermanGame extends Canvas implements Runnable {
 
         // background
         g.setColor(Color.red);
-        g.fillRect(0,0, WIDTH, HEIGHT);
+        g.fillRect(0, 0, WIDTH, HEIGHT);
 
         // render both still and moving entities
         handler.render(g);
