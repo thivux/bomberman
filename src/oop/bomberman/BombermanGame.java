@@ -2,8 +2,6 @@ package oop.bomberman;
 
 import oop.bomberman.control.Handler;
 import oop.bomberman.control.Keyboard;
-import oop.bomberman.entities.Bomber;
-import oop.bomberman.entities.ID;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -17,6 +15,7 @@ public class BombermanGame extends Canvas implements Runnable {
     private boolean isRunning;
     private Thread thread;
     private Handler handler;
+    private LevelLoader levelLoader;
 
     public BombermanGame() {
         new Frame(WIDTH, HEIGHT, "Bomberman", this);
@@ -26,7 +25,11 @@ public class BombermanGame extends Canvas implements Runnable {
         handler = new Handler();
         this.addKeyListener(new Keyboard(handler));
 
-        handler.addMovingEntity(new Bomber(0, 0, ID.Bomber, handler));
+        levelLoader = new LevelLoader(handler);
+        levelLoader.loadFile();
+        levelLoader.createLevel();
+
+        //handler.addMovingEntity(new Bomber(0, 0, ID.Bomber, handler));
     }
 
     public static void main(String[] args) {
@@ -74,20 +77,6 @@ public class BombermanGame extends Canvas implements Runnable {
         }
         stop();
     }
-
-//    public void createMap() {
-//        for (int i = 0; i < WIDTH; i++) {
-//            for (int j = 0; j < HEIGHT; j++) {
-//                Entity object;
-//                if (j == 0 || j == HEIGHT - 1 || i == 0 || i == WIDTH - 1) {
-//                    object = new Wall(i, j, Sprite.wall.getFxImage());
-//                } else {
-//                    object = new Grass(i, j, Sprite.grass.getFxImage());
-//                }
-//                stillObjects.add(object);
-//            }
-//        }
-//    }
 
     // 60 times per second
     public void update() {

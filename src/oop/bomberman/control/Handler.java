@@ -16,15 +16,13 @@ public class Handler {
     public void update() {
         movingEntities.forEach(Entity::update);
     }
-
-
+    
     public void render(Graphics g) {
-
-        for (Entity entity : movingEntities) {
+        for (Entity entity : stillEntities) {
             entity.render(g);
         }
 
-        for (Entity entity : stillEntities) {
+        for (Entity entity : movingEntities) {
             entity.render(g);
         }
     }
@@ -63,5 +61,9 @@ public class Handler {
 
     public void addMovingEntity(Entity entity) {
         movingEntities.add(entity);
+    }
+
+    public void addStillEntity(Entity entity) {
+        stillEntities.add(entity);
     }
 }

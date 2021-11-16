@@ -4,11 +4,11 @@ import oop.bomberman.graphics.Sprite;
 
 import java.awt.*;
 
-public class Wall extends Entity {
+public class Brick extends Entity {
 
-    public Wall(int xUnit, int yUnit, ID id) {
+    public Brick(int xUnit, int yUnit, ID id) {
         super(xUnit, yUnit, id);
-        sprite = Sprite.wall;
+        sprite = Sprite.brick;
     }
 
     @Override
