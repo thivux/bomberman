@@ -1,5 +1,6 @@
 package oop.bomberman.entities.stilllEntities;
 
+import oop.bomberman.BombermanGame;
 import oop.bomberman.entities.Entity;
 import oop.bomberman.entities.ID;
 import oop.bomberman.graphics.Sprite;
@@ -15,7 +16,7 @@ public class Grass extends Entity {
 
     @Override
     public void render(Graphics graphics) {
-        graphics.drawImage(sprite.getImage(), x, y, 30, 30, null);
+        graphics.drawImage(sprite.getImage(), x, y, BombermanGame.TILES_SIZE, BombermanGame.TILES_SIZE, null);
     }
 
     @Override

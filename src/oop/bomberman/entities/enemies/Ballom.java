@@ -1,5 +1,6 @@
 package oop.bomberman.entities.enemies;
 
+import oop.bomberman.BombermanGame;
 import oop.bomberman.control.Handler;
 import oop.bomberman.entities.AnimatedEntity;
 import oop.bomberman.entities.Entity;
@@ -18,8 +19,8 @@ public class Ballom extends AnimatedEntity {
     }
 
     @Override
-    public void render(Graphics graphics) { // TODO: change 30
-        graphics.drawImage(sprite.getImage(), x, y, 30, 30, null);
+    public void render(Graphics graphics) {
+        graphics.drawImage(sprite.getImage(), x, y, BombermanGame.TILES_SIZE, BombermanGame.TILES_SIZE, null);
     }
 
     @Override

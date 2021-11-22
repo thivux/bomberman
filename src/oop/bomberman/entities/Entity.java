@@ -1,6 +1,7 @@
 package oop.bomberman.entities;
 
 
+import oop.bomberman.BombermanGame;
 import oop.bomberman.graphics.Sprite;
 
 import java.awt.*;
@@ -30,8 +31,8 @@ public abstract class Entity {
 
     public abstract void update();
 
-    public Rectangle getBounds() {  // TODO: change 30
-        return new Rectangle(x, y, 20, 20);
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, BombermanGame.TILES_SIZE - 2, BombermanGame.TILES_SIZE - 2);
     }
 
     public abstract boolean collide(Entity entity);
