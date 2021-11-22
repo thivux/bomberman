@@ -1,7 +1,12 @@
-package oop.bomberman;
+package oop.bomberman.entities.enemies;
 
 import oop.bomberman.control.Handler;
-import oop.bomberman.entities.*;
+import oop.bomberman.entities.Bomber;
+import oop.bomberman.entities.ID;
+import oop.bomberman.entities.stilllEntities.Brick;
+import oop.bomberman.entities.stilllEntities.Grass;
+import oop.bomberman.entities.stilllEntities.Portal;
+import oop.bomberman.entities.stilllEntities.Wall;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -49,7 +54,7 @@ public class LevelLoader {
                         handler.addStillEntity(new Brick(30 * j, 30 * i, ID.Bomber));
                         break;
                     case 'x':
-                        //handler.addStillEntity(new Portal(30 * j, 30 * i, ID.Bomber));
+                        handler.addStillEntity(new Portal(30 * j, 30 * i, ID.Portal));
                         break;
                     case 'p':
                         handler.addStillEntity(new Grass(30 * j, 30 * i, ID.Bomber));
@@ -57,11 +62,11 @@ public class LevelLoader {
                         break;
                     case '1':
                         handler.addStillEntity(new Grass(30 * j, 30 * i, ID.Bomber));
-                        //handler.addMovingEntity(new Ballom(30 * j, 30 * i, ID.Bomber, handler));
+                        handler.addMovingEntity(new Ballom(30 * j, 30 * i, ID.Bomber, handler));
                         break;
                     case '2':
                         handler.addStillEntity(new Grass(30 * j, 30 * i, ID.Bomber));
-                        //handler.addMovingEntity(new Oneal(30 * j, 30 * i, ID.Bomber, handler));
+                        handler.addMovingEntity(new Oneal(30 * j, 30 * i, ID.Bomber, handler));
                         break;
                     case 'b': // bomb item
                         break;

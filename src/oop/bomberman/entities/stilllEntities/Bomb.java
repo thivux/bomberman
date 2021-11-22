@@ -1,4 +1,7 @@
-package oop.bomberman.entities;
+package oop.bomberman.entities.stilllEntities;
+
+import oop.bomberman.entities.Entity;
+import oop.bomberman.entities.ID;
 
 import java.awt.*;
 
@@ -18,11 +21,6 @@ public class Bomb extends Entity {
     @Override
     public void update() {
 
-    }
-
-    @Override
-    public Rectangle getBounds() {
-        return null;
     }
 
     @Override

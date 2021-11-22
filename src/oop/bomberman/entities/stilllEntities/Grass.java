@@ -1,14 +1,16 @@
-package oop.bomberman.entities;
+package oop.bomberman.entities.stilllEntities;
 
+import oop.bomberman.entities.Entity;
+import oop.bomberman.entities.ID;
 import oop.bomberman.graphics.Sprite;
 
 import java.awt.*;
 
-public class Wall extends Entity {
+public class Grass extends Entity {
 
-    public Wall(int xUnit, int yUnit, ID id) {
+    public Grass(int xUnit, int yUnit, ID id) {
         super(xUnit, yUnit, id);
-        sprite = Sprite.wall;
+        sprite = Sprite.grass;
     }
 
     @Override
@@ -19,11 +21,6 @@ public class Wall extends Entity {
     @Override
     public void update() {
 
-    }
-
-    @Override
-    public Rectangle getBounds() {
-        return new Rectangle(x, y, 30, 30);
     }
 
     @Override

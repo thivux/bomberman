@@ -2,6 +2,7 @@ package oop.bomberman;
 
 import oop.bomberman.control.Handler;
 import oop.bomberman.control.Keyboard;
+import oop.bomberman.entities.enemies.LevelLoader;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;

@@ -1,14 +1,16 @@
-package oop.bomberman.entities;
+package oop.bomberman.entities.stilllEntities;
 
+import oop.bomberman.entities.Entity;
+import oop.bomberman.entities.ID;
 import oop.bomberman.graphics.Sprite;
 
 import java.awt.*;
 
-public class Grass extends Entity {
+public class Brick extends Entity {
 
-    public Grass(int xUnit, int yUnit, ID id) {
+    public Brick(int xUnit, int yUnit, ID id) {
         super(xUnit, yUnit, id);
-        sprite = Sprite.grass;
+        sprite = Sprite.brick;
     }
 
     @Override
@@ -19,11 +21,6 @@ public class Grass extends Entity {
     @Override
     public void update() {
 
-    }
-
-    @Override
-    public Rectangle getBounds() {
-        return null;
     }
 
     @Override

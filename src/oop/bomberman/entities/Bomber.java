@@ -17,7 +17,7 @@ public class Bomber extends AnimatedEntity {
     }
 
     @Override
-    public void render(Graphics graphics) {
+    public void render(Graphics graphics) { // TODO: hard code kia
         graphics.drawImage(sprite.getImage(), x, y, 30, 30, null);
     }
 
@@ -55,12 +55,6 @@ public class Bomber extends AnimatedEntity {
         }
 
         animate();
-    }
-
-    // used for collision in the future
-    @Override
-    public Rectangle getBounds() {
-        return new Rectangle(x, y, 30, 30);
     }
 
     @Override

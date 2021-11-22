@@ -1,6 +1,6 @@
 package oop.bomberman.entities;
 
-abstract class AnimatedEntity extends Entity {
+public abstract class AnimatedEntity extends Entity {
 
     protected int _animate = 0;
     protected final int MAX_ANIMATE = 7500;
