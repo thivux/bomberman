@@ -17,8 +17,8 @@ public class Oneal extends Entity {
     }
 
     @Override
-    public void render(Graphics graphics) {
-
+    public void render(Graphics graphics) { // TODO: change hard code 30
+        graphics.drawImage(sprite.getImage(), x, y, 30, 30, null);
     }
 
     @Override

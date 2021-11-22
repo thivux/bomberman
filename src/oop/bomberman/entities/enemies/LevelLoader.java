@@ -48,25 +48,25 @@ public class LevelLoader {
             for (int j = 0; j < width; j++) {
                 switch (map[i][j]) {
                     case '#':
-                        handler.addStillEntity(new Wall(30 * j, 30 * i, ID.Bomber));
+                        handler.addStillEntity(new Wall(30 * j, 30 * i, ID.Wall));
                         break;
                     case '*':
-                        handler.addStillEntity(new Brick(30 * j, 30 * i, ID.Bomber));
+                        handler.addStillEntity(new Brick(30 * j, 30 * i, ID.Brick));
                         break;
                     case 'x':
                         handler.addStillEntity(new Portal(30 * j, 30 * i, ID.Portal));
                         break;
                     case 'p':
-                        handler.addStillEntity(new Grass(30 * j, 30 * i, ID.Bomber));
+                        handler.addStillEntity(new Grass(30 * j, 30 * i, ID.Grass));
                         handler.addMovingEntity(new Bomber(30 * j, 30 * i, ID.Bomber, handler));
                         break;
                     case '1':
-                        handler.addStillEntity(new Grass(30 * j, 30 * i, ID.Bomber));
-                        handler.addMovingEntity(new Ballom(30 * j, 30 * i, ID.Bomber, handler));
+                        handler.addStillEntity(new Grass(30 * j, 30 * i, ID.Grass));
+                        handler.addMovingEntity(new Ballom(30 * j, 30 * i, ID.Ballom, handler));
                         break;
                     case '2':
-                        handler.addStillEntity(new Grass(30 * j, 30 * i, ID.Bomber));
-                        handler.addMovingEntity(new Oneal(30 * j, 30 * i, ID.Bomber, handler));
+                        handler.addStillEntity(new Grass(30 * j, 30 * i, ID.Grass));
+                        handler.addMovingEntity(new Oneal(30 * j, 30 * i, ID.Oneal, handler));
                         break;
                     case 'b': // bomb item
                         break;
@@ -75,7 +75,7 @@ public class LevelLoader {
                     case 's': // speed item
                         break;
                     default:
-                        handler.addStillEntity(new Grass(30 * j, 30 * i, ID.Bomber));
+                        handler.addStillEntity(new Grass(30 * j, 30 * i, ID.Grass));
                 }
             }
         }

@@ -19,7 +19,7 @@ public abstract class Entity {
     protected float dX;
     protected float dY;
 
-    //Khởi tạo đối tượng, chuyển từ tọa độ đơn vị sang tọa độ trong canvas
+    // Khởi tạo đối tượng, chuyển từ tọa độ đơn vị sang tọa độ trong canvas
     public Entity(int xUnit, int yUnit, ID id) {
         x = xUnit;
         y = yUnit;
@@ -31,7 +31,7 @@ public abstract class Entity {
     public abstract void update();
 
     public Rectangle getBounds() {  // TODO: change 30
-        return new Rectangle(x, y, 30, 30);
+        return new Rectangle(x, y, 32, 32);
     }
 
     public abstract boolean collide(Entity entity);

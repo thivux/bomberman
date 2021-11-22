@@ -23,8 +23,6 @@ public class Bomber extends AnimatedEntity {
 
     @Override
     public void update() {
-        x += dX;
-        y += dY;
 
         if (handler.isDown()) {  // down key is pressed
             sprite = Sprite.movingSprite(Sprite.player_down, Sprite.player_down_1, Sprite.player_down_2, _animate, 20);
@@ -53,6 +51,9 @@ public class Bomber extends AnimatedEntity {
         } else if (!handler.isLeft()) { // right key is released and left key is not pressed
             dX = 0;
         }
+
+        x += dX;
+        y += dY;
 
         animate();
     }
