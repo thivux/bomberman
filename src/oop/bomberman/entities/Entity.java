@@ -31,7 +31,7 @@ public abstract class Entity {
     public abstract void update();
 
     public Rectangle getBounds() {  // TODO: change 30
-        return new Rectangle(x, y, 32, 32);
+        return new Rectangle(x, y, 20, 20);
     }
 
     public abstract boolean collide(Entity entity);

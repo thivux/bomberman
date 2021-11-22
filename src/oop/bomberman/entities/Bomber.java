@@ -8,7 +8,7 @@ import java.awt.*;
 public class Bomber extends AnimatedEntity {
     // chi co bomber can handler
     Handler handler;
-    private static final int VELOCITY = 5;
+    private static final int VELOCITY = 3;
 
     public Bomber(int xUnit, int yUnit, ID id, Handler handler) {
         super(xUnit, yUnit, id);
@@ -23,6 +23,17 @@ public class Bomber extends AnimatedEntity {
 
     @Override
     public void update() {
+        x += dX;
+        y += dY;
+
+        for (int i = 0; i < handler.stillEntities.size(); i++) {
+            Entity temp = handler.stillEntities.get(i);
+            if (temp.getId() != ID.Grass && this.collide(temp)) {
+                System.out.println(temp.getId());
+                x -= dX;
+                y -= dY;
+            }
+        }
 
         if (handler.isDown()) {  // down key is pressed
             sprite = Sprite.movingSprite(Sprite.player_down, Sprite.player_down_1, Sprite.player_down_2, _animate, 20);
@@ -52,14 +63,12 @@ public class Bomber extends AnimatedEntity {
             dX = 0;
         }
 
-        x += dX;
-        y += dY;
 
         animate();
     }
 
     @Override
-    public boolean collide(Entity entity) {
-        return false;
+    public boolean collide(Entity that) {
+        return getBounds().intersects(that.getBounds());
     }
 }
