@@ -1,6 +1,7 @@
 package oop.bomberman.entities;
 
 
+import oop.bomberman.BombermanGame;
 import oop.bomberman.graphics.Sprite;
 
 import java.awt.*;
@@ -19,7 +20,7 @@ public abstract class Entity {
     protected float dX;
     protected float dY;
 
-    //Khởi tạo đối tượng, chuyển từ tọa độ đơn vị sang tọa độ trong canvas
+    // Khởi tạo đối tượng, chuyển từ tọa độ đơn vị sang tọa độ trong canvas
     public Entity(int xUnit, int yUnit, ID id) {
         x = xUnit;
         y = yUnit;
@@ -30,7 +31,9 @@ public abstract class Entity {
 
     public abstract void update();
 
-    public abstract Rectangle getBounds();
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, BombermanGame.TILES_SIZE - 2, BombermanGame.TILES_SIZE - 2);
+    }
 
     public abstract boolean collide(Entity entity);
 
