@@ -1,16 +1,16 @@
-package oop.bomberman.control;
+package control;
 
-import oop.bomberman.BombermanGame;
-import oop.bomberman.entities.Entity;
+import entities.Entity;
+import gui.GamePanel;
 
 public class Camera {
     private float x, y;
     // size of screen aka camera resolution
-    private static final int VIEWPORT_SIZE_X = BombermanGame.SCREEN_WIDTH;
-    private static final int VIEWPORT_SIZE_Y = BombermanGame.SCREEN_HEIGHT;
+    private static final int VIEWPORT_SIZE_X = GamePanel.SCREEN_WIDTH;
+    private static final int VIEWPORT_SIZE_Y = GamePanel.SCREEN_HEIGHT;
     // actual size of game
-    private static final int WORLD_SIZE_X = BombermanGame.TILES_SIZE * 31;
-    private static final int WORLD_SIZE_Y = BombermanGame.TILES_SIZE * 13;
+    private static final int WORLD_SIZE_X = GamePanel.TILE_SIZE * 31;
+    private static final int WORLD_SIZE_Y = GamePanel.TILE_SIZE * 13;
     // offset
     private static final int offsetMaxX = WORLD_SIZE_X - VIEWPORT_SIZE_X - 48;
     private static final int offsetMaxY = WORLD_SIZE_Y - VIEWPORT_SIZE_Y;

@@ -1,6 +1,5 @@
-package oop.bomberman.entities;
+package entities;
 
-// each type of entity has an ID
 public enum ID {
     Bomber(),
     Grass(),
