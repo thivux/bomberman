@@ -2,6 +2,7 @@ package level;
 
 import control.Keyboard;
 import entities.Entity;
+import entities.tiles.Tile;
 import gui.GamePanel;
 
 import java.awt.*;
@@ -9,9 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
-    protected GamePanel gamePanel;
-    protected Keyboard keyboard;
-    LevelLoader levelLoader = new LevelLoader(this);
+    private GamePanel gamePanel;
+    private Keyboard keyboard;
+
+    private LevelLoader levelLoader = new LevelLoader(this);
+    private Tile[][] tiles;
+
     public List<Entity> movingEntities = new ArrayList<>();
     public List<Entity> stillEntities = new ArrayList<>();
 
@@ -19,7 +23,15 @@ public class Board {
         this.gamePanel = gamePanel;
         keyboard = gamePanel.getKeyboard();
         levelLoader.loadFile();
+        tiles = new Tile[levelLoader.getHeight()][levelLoader.getWidth()];
         levelLoader.createLevel();
+
+//        for (int i = 0; i < tiles.length; i++) {
+//            for (int j = 0; j < tiles[0].length; j++) {
+//                System.out.print(tiles[i][j].getId() + " ");
+//            }
+//            System.out.println();
+//        }
     }
 
     public void update() {
@@ -48,5 +60,13 @@ public class Board {
 
     public Keyboard getKeyboard() {
         return keyboard;
+    }
+
+    public void setTile(int row, int col, Tile tile) {
+        tiles[col][row] = tile;
+    }
+
+    public Tile getTile(int row, int col) {
+        return tiles[col][row];
     }
 }

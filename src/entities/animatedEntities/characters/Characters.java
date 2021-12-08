@@ -8,6 +8,7 @@ import java.awt.*;
 public abstract class Characters extends AnimatedEntity {
     protected Board board;
     protected int speed;
+    protected String direction;
 
     public Characters(int x, int y, Board board) {
         super(x, y);
@@ -17,5 +18,5 @@ public abstract class Characters extends AnimatedEntity {
     public abstract void update();
 
     public abstract void draw(Graphics2D g2);
-
+    
 }

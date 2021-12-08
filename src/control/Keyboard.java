@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 
 public class Keyboard implements KeyListener {
 
-    public boolean upPressed, downPressed, leftPressed, rightPressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed;
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -28,7 +28,9 @@ public class Keyboard implements KeyListener {
         if (code == KeyEvent.VK_D) {
             rightPressed = true;
         }
-
+        if (code == KeyEvent.VK_SPACE) {
+            spacePressed = true;
+        }
     }
 
     @Override
@@ -46,6 +48,9 @@ public class Keyboard implements KeyListener {
         }
         if (code == KeyEvent.VK_D) {
             rightPressed = false;
+        }
+        if (code == KeyEvent.VK_SPACE) {
+            spacePressed = false;
         }
     }
 }

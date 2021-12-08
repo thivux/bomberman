@@ -1,7 +1,6 @@
 package entities.animatedEntities.characters;
 
 import control.Keyboard;
-import entities.Entity;
 import entities.ID;
 import graphics.Sprite;
 import gui.GamePanel;
@@ -10,8 +9,7 @@ import level.Board;
 import java.awt.*;
 
 public class Bomber extends Characters {
-    Keyboard keyboard;
-    String direction;
+    private Keyboard keyboard;
 
     public Bomber(int x, int y, Board board) {
         super(x, y, board);
@@ -33,69 +31,72 @@ public class Bomber extends Characters {
             direction = "up";
             y -= speed;
             bounds.y -= speed;
-            for (Entity entity : board.stillEntities) {
-                if ((entity.getBounds().contains(leftX, topY - speed) || entity.getBounds().contains(rightX, topY - speed)) && entity.getId() != ID.Grass) {
-                    y += speed;
-                    bounds.y += speed;
-                    System.out.println(entity.getId());
-                }
+
+            if (board.getTile(leftX / GamePanel.TILE_SIZE, (topY - speed) / GamePanel.TILE_SIZE).collision
+                    || board.getTile(rightX / GamePanel.TILE_SIZE, (topY - speed) / GamePanel.TILE_SIZE).collision) {
+                y += speed;
+                bounds.y += speed;
             }
         }
         if (keyboard.downPressed) {
             direction = "down";
             y += speed;
             bounds.y += speed;
-            for (Entity entity : board.stillEntities) {
-                if ((entity.getBounds().contains(leftX, bottomY + speed) || entity.getBounds().contains(rightX, bottomY + speed)) && entity.getId() != ID.Grass) {
-                    y -= speed;
-                    bounds.y -= speed;
-                    System.out.println(entity.getId());
-                }
+
+            if (board.getTile(leftX / GamePanel.TILE_SIZE, (bottomY + speed) / GamePanel.TILE_SIZE).collision
+                    || board.getTile(rightX / GamePanel.TILE_SIZE, (bottomY + speed) / GamePanel.TILE_SIZE).collision) {
+                y -= speed;
+                bounds.y -= speed;
             }
         }
         if (keyboard.leftPressed) {
             direction = "left";
             x -= speed;
             bounds.x -= speed;
-            for (Entity entity : board.stillEntities) {
-                if ((entity.getBounds().contains(leftX - speed, topY) || entity.getBounds().contains(leftX - speed, bottomY)) && entity.getId() != ID.Grass) {
-                    x += speed;
-                    bounds.x += speed;
-                    System.out.println(entity.getId());
-                }
+            if (board.getTile((leftX - speed) / GamePanel.TILE_SIZE, topY / GamePanel.TILE_SIZE).collision
+                    || board.getTile((leftX - speed) / GamePanel.TILE_SIZE, bottomY / GamePanel.TILE_SIZE).collision) {
+                x += speed;
+                bounds.x += speed;
             }
         }
         if (keyboard.rightPressed) {
             direction = "right";
             x += speed;
             bounds.x += speed;
-            for (Entity entity : board.stillEntities) {
-                if ((entity.getBounds().contains(rightX + speed, topY) || entity.getBounds().contains(rightX + speed, bottomY)) && entity.getId() != ID.Grass) {
-                    x -= speed;
-                    bounds.x -= speed;
-                    System.out.println(entity.getId());
-                }
+            if (board.getTile((rightX + speed) / GamePanel.TILE_SIZE, topY / GamePanel.TILE_SIZE).collision
+                    || board.getTile((rightX + speed) / GamePanel.TILE_SIZE, bottomY / GamePanel.TILE_SIZE).collision) {
+                x -= speed;
+                bounds.x -= speed;
             }
         }
 
-
-//        System.out.println(bounds.x + " " + bounds.y + " " + bounds.width + " " + bounds.height);
+//        System.out.println(bounds.x / GamePanel.TILE_SIZE + " " + bounds.y / GamePanel.TILE_SIZE);
 
         if (keyboard.upPressed || keyboard.downPressed || keyboard.leftPressed || keyboard.rightPressed) {
             animate();
         }
-
     }
 
     public void draw(Graphics2D g2) {
         switch (direction) {
-            case "up" -> sprite = Sprite.movingSprite(Sprite.player_up, Sprite.player_up_1, Sprite.player_up_2, _animate, 30);
-            case "down" -> sprite = Sprite.movingSprite(Sprite.player_down, Sprite.player_down_1, Sprite.player_down_2, _animate, 30);
-            case "left" -> sprite = Sprite.movingSprite(Sprite.player_left, Sprite.player_left_1, Sprite.player_left_2, _animate, 30);
-            case "right" -> sprite = Sprite.movingSprite(Sprite.player_right, Sprite.player_right_1, Sprite.player_right_2, _animate, 30);
+            case "up":
+                sprite = Sprite.movingSprite(Sprite.player_up, Sprite.player_up_1, Sprite.player_up_2, _animate, 30);
+                break;
+            case "down":
+                sprite = Sprite.movingSprite(Sprite.player_down, Sprite.player_down_1, Sprite.player_down_2, _animate, 30);
+                break;
+            case "left":
+                sprite = Sprite.movingSprite(Sprite.player_left, Sprite.player_left_1, Sprite.player_left_2, _animate, 30);
+                break;
+            case "right":
+                sprite = Sprite.movingSprite(Sprite.player_right, Sprite.player_right_1, Sprite.player_right_2, _animate, 30);
+                break;
+            default:
         }
 
         g2.drawImage(sprite.getImage(), x, y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
+
+        //erase comment to see hitbox
         //g2.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
     }
 }

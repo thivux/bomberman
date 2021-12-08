@@ -17,8 +17,8 @@ public class LevelLoader {
     private int level;
     private int height;
     private int width;
-    char[][] map;
-    Board board;
+    private char[][] map;
+    private Board board;
 
     public LevelLoader(Board board) {
         this.board = board;
@@ -49,40 +49,68 @@ public class LevelLoader {
             for (int j = 0; j < width; j++) {
                 switch (map[i][j]) {
                     case '#':
-                        board.addStillEntity(new Wall(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i));
+                        Wall wall = new Wall(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
+                        board.addStillEntity(wall);
+                        board.setTile(j, i, wall);
                         break;
                     case '*':
-                        board.addStillEntity(new Brick(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i));
+                        Brick brick = new Brick(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
+                        board.addStillEntity(brick);
+                        board.setTile(j, i, brick);
                         break;
                     case 'x':
+                        Portal portal = new Portal(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
                         board.addStillEntity(new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i));
-                        board.addStillEntity(new Portal(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i));
+                        board.addStillEntity(portal);
+                        board.setTile(j, i, portal);
                         break;
                     case 'p':
-                        board.addStillEntity(new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i));
+                        Grass grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
+                        board.addStillEntity(grass);
+                        board.setTile(j, i, grass);
                         board.addMovingEntity(new Bomber(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, board));
                         break;
                     case '1':
-                        board.addStillEntity(new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i));
+                        grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
+                        board.addStillEntity(grass);
+                        board.setTile(j, i, grass);
                         board.addMovingEntity(new Ballom(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, board));
                         break;
                     case '2':
-                        board.addStillEntity(new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i));
+                        grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
+                        board.addStillEntity(grass);
+                        board.setTile(j, i, grass);
                         board.addMovingEntity(new Oneal(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, board));
                         break;
                     case 'b': //TODO: bomb item
-                        board.addStillEntity(new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i));
+                        grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
+                        board.addStillEntity(grass);
+                        board.setTile(j, i, grass);
                         break;
                     case 'f': //TODO: fire item
-                        board.addStillEntity(new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i));
+                        grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
+                        board.addStillEntity(grass);
+                        board.setTile(j, i, grass);
                         break;
                     case 's': //TODO: speed item
-                        board.addStillEntity(new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i));
+                        grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
+                        board.addStillEntity(grass);
+                        board.setTile(j, i, grass);
                         break;
                     default:
-                        board.addStillEntity(new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i));
+                        grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
+                        board.addStillEntity(grass);
+                        board.setTile(j, i, grass);
                 }
             }
         }
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 }
