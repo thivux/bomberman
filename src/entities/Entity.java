@@ -9,7 +9,7 @@ public abstract class Entity {
     protected Sprite sprite;
     protected ID id;
     protected Rectangle bounds;
-    protected boolean isRemoved;
+    protected boolean isRemoved = false;
 
     public Entity(int x, int y) {
         this.x = x;

@@ -62,6 +62,10 @@ public class Board {
         movingEntities.add(entity);
     }
 
+    public void removeMovingEntity(Entity entity) {
+        movingEntities.remove(entity);
+    }
+
     public Keyboard getKeyboard() {
         return keyboard;
     }

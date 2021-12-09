@@ -2,6 +2,7 @@ package gui;
 
 import control.Camera;
 import control.Keyboard;
+import entities.Entity;
 import entities.ID;
 import level.Board;
 
@@ -85,8 +86,12 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
         for (int i = 0; i < board.movingEntities.size(); i++) {
-            if (board.movingEntities.get(i).getId() == ID.Bomber) {   // camera move according to bomber pos
-                camera.update(board.movingEntities.get(i));
+            Entity entity = board.movingEntities.get(i);
+            if (entity.getId() == ID.Bomber) {   // camera move according to bomber pos
+                camera.update(entity);
+            }
+            if (entity.isRemoved()) {
+                board.removeMovingEntity(entity);
             }
         }
         board.update();

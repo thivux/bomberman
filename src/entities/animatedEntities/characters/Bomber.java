@@ -81,7 +81,7 @@ public class Bomber extends Characters {
 //            System.out.println("drop bomb");
             int xt = ((x + sprite.getSize() / 2) / GamePanel.TILE_SIZE) * GamePanel.TILE_SIZE;
             int yt = ((y + sprite.getSize() / 2) / GamePanel.TILE_SIZE) * GamePanel.TILE_SIZE; //subtract half player height and minus 1 y position
-            System.out.println(xt + " " + yt);
+//            System.out.println(xt + " " + yt);
             Bomb bomb = new Bomb(xt, yt, board);
             board.addMovingEntity(bomb);
         }
