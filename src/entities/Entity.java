@@ -9,6 +9,7 @@ public abstract class Entity {
     protected Sprite sprite;
     protected ID id;
     protected Rectangle bounds;
+    protected boolean isRemoved;
 
     public Entity(int x, int y) {
         this.x = x;
@@ -33,5 +34,13 @@ public abstract class Entity {
 
     public ID getId() {
         return id;
+    }
+
+    public boolean isRemoved() {
+        return isRemoved;
+    }
+
+    public void remove() {
+        isRemoved = true;
     }
 }

@@ -20,6 +20,16 @@ public class GamePanel extends JPanel implements Runnable {
     public final static int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL; // 768 pixels
     public final static int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW; // 576 pixels
 
+    // configs
+    private static final int BOMBRATE = 1;
+    private static final int BOMBRADIUS = 1;
+    private static final double SPEED = 1.0;
+
+    private static int bombRate = BOMBRATE;
+    private static int bombRadius = BOMBRADIUS;
+    private static double speed = SPEED;
+
+
     //FPS
     int FPS = 60;
 
@@ -66,7 +76,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
 
             if (timer >= 1000000000) {
-                System.out.println("FPS: " + drawCount);
+//                System.out.println("FPS: " + drawCount);
                 drawCount = 0;
                 timer = 0;
             }
@@ -96,5 +106,17 @@ public class GamePanel extends JPanel implements Runnable {
 
     public Keyboard getKeyboard() {
         return keyboard;
+    }
+
+    public static int getBombRate() {
+        return bombRate;
+    }
+
+    public static int getBombRadius() {
+        return bombRadius;
+    }
+
+    public static double getSpeed() {
+        return speed;
     }
 }
