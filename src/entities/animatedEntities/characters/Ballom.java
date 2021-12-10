@@ -16,7 +16,6 @@ public class Ballom extends Characters {
         sprite = Sprite.balloom_left1;
         id = ID.Ballom;
         speed = 1;
-        bounds = new Rectangle(x, y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE);
         direction = "right";
     }
 
@@ -100,4 +99,9 @@ public class Ballom extends Characters {
         g2.drawImage(sprite.getImage(), x, y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
         //g2.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
     }
+//
+//    @Override
+//    public void kill() {
+//
+//    }
 }

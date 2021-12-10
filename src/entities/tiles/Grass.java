@@ -12,7 +12,6 @@ public class Grass extends Tile {
         id = ID.Grass;
         sprite = Sprite.grass;
         collision = false;
-        bounds = new Rectangle(x, y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE);
     }
 
     public void update() {

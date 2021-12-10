@@ -1,6 +1,8 @@
 package entities.animatedEntities.bomb;
 
 import entities.animatedEntities.AnimatedEntity;
+import entities.tiles.Grass;
+import entities.tiles.Tile;
 import graphics.Sprite;
 import gui.GamePanel;
 import level.Board;
@@ -18,6 +20,7 @@ public class Bomb extends AnimatedEntity {
         super(x, y);
         this.sprite = Sprite.bomb;
         this.board = board;
+        collision = true;
     }
 
     @Override
@@ -33,6 +36,7 @@ public class Bomb extends AnimatedEntity {
                     afterExplosion--;
                 } else {
                     remove();
+                    board.setTile(x / GamePanel.TILE_SIZE, y / GamePanel.TILE_SIZE, new Grass(x, y));
                 }
             }
         }
@@ -60,5 +64,6 @@ public class Bomb extends AnimatedEntity {
         }
 
         g2.drawImage(sprite.getImage(),x ,y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
+        g2.draw(bounds);
     }
 }

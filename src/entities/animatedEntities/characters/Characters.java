@@ -1,5 +1,6 @@
 package entities.animatedEntities.characters;
 
+import entities.Entity;
 import entities.animatedEntities.AnimatedEntity;
 import gui.GamePanel;
 import level.Board;
@@ -10,10 +11,13 @@ public abstract class Characters extends AnimatedEntity {
     protected Board board;
     protected int speed;
     protected String direction;
+    protected boolean alive;
+    protected int afterKill = 20;
 
     public Characters(int x, int y, Board board) {
         super(x, y);
         this.board = board;
+        alive = true;
     }
 
     public abstract void update();
@@ -63,6 +67,19 @@ public abstract class Characters extends AnimatedEntity {
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + direction);
+        }
+    }
+
+    //    public abstract void kill();
+    protected void kill() {
+        alive = false;
+    }
+
+    protected void afterKill() {
+        if (afterKill > 0) {
+            afterKill--;
+        } else {
+            remove();
         }
     }
 }

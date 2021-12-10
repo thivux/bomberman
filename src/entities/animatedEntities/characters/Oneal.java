@@ -17,7 +17,6 @@ public class Oneal extends Characters {
         sprite = Sprite.oneal_left1;
         id = ID.Oneal;
         speed = 2;
-        bounds = new Rectangle(x, y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE);
         direction = "right";
     }
 
@@ -121,4 +120,9 @@ public class Oneal extends Characters {
         g2.drawImage(sprite.getImage(), x, y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
         //g2.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
     }
+//
+//    @Override
+//    public void kill() {
+//
+//    }
 }

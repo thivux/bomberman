@@ -12,7 +12,6 @@ public class Wall extends Tile {
         sprite = Sprite.wall;
         id = ID.Wall;
         collision = true;
-        bounds = new Rectangle(x, y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE);
     }
 
     public void update() {

@@ -12,7 +12,6 @@ public class Portal extends Tile {
         id = ID.Portal;
         sprite = Sprite.portal;
         collision = true;
-        bounds = new Rectangle(x, y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE);
     }
 
     public void update() {

@@ -1,10 +1,12 @@
 package entities;
 
 import graphics.Sprite;
+import gui.GamePanel;
 
 import java.awt.*;
 
 public abstract class Entity {
+    public boolean collision = false;
     protected int x, y;
     protected Sprite sprite;
     protected ID id;
@@ -14,6 +16,7 @@ public abstract class Entity {
     public Entity(int x, int y) {
         this.x = x;
         this.y = y;
+        bounds = new Rectangle(x, y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE);
     }
 
     public abstract void update();

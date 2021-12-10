@@ -1,6 +1,7 @@
 package entities.animatedEntities.characters;
 
 import control.Keyboard;
+import entities.Entity;
 import entities.ID;
 import entities.animatedEntities.bomb.Bomb;
 import graphics.Sprite;
@@ -17,38 +18,48 @@ public class Bomber extends Characters {
         this.keyboard = board.getKeyboard();
         id = ID.Bomber;
         speed = 2;
-        bounds = new Rectangle(x, y + GamePanel.TILE_SIZE / 10, GamePanel.TILE_SIZE / 3 * 2, GamePanel.TILE_SIZE / 3 * 2);
+        bounds = new Rectangle(x, y + GamePanel.TILE_SIZE / 10, GamePanel.TILE_SIZE / 3 * 2, GamePanel.TILE_SIZE / 5 * 4);
         direction = "right";
     }
 
     @Override
     public void update() {
+        if (!alive) {
+            afterKill();
+        }
+
         if (keyboard.upPressed) {
             direction = "up";
             if (canMove("up")) {
                 move("up");
+                collide();
+
             }
         }
         if (keyboard.downPressed) {
             direction = "down";
             if (canMove("down")) {
                 move("down");
+                collide();
             }
         }
         if (keyboard.leftPressed) {
             direction = "left";
             if (canMove("left")) {
                 move("left");
+                collide();
+
             }
         }
         if (keyboard.rightPressed) {
             direction = "right";
             if (canMove("right")) {
                 move("right");
+                collide();
+
             }
         }
 
-//        System.out.println(bounds.x / GamePanel.TILE_SIZE + " " + bounds.y / GamePanel.TILE_SIZE);
 
         if (keyboard.upPressed || keyboard.downPressed || keyboard.leftPressed || keyboard.rightPressed) {
             animate();
@@ -61,6 +72,19 @@ public class Bomber extends Characters {
 //            System.out.println(xt + " " + yt);
             Bomb bomb = new Bomb(xt, yt, board);
             board.addMovingEntity(bomb);
+            board.setTile(xt / GamePanel.TILE_SIZE, yt / GamePanel.TILE_SIZE, bomb);
+        }
+    }
+
+    public void collide() {
+        for (int i = 0; i < board.movingEntities.size(); i++) {
+            Entity that = board.movingEntities.get(i);
+            if (this.getClass() != that.getClass() && this.getBounds().intersects(that.getBounds())) {
+                if (that.getClass().equals(Bomb.class)) {
+                } else {
+                    kill();
+                }
+            }
         }
     }
 
@@ -81,11 +105,13 @@ public class Bomber extends Characters {
             default:
         }
 
+        if (!alive) {
+            sprite = Sprite.movingSprite(Sprite.player_dead1, Sprite.player_dead2, Sprite.player_dead3, _animate, 30);
+        }
+
         g2.drawImage(sprite.getImage(), x, y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
 
-        //erase comment to see hitbox
-
-        //g2.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
+        // erase comment to see hitbox
         g2.draw(bounds);
 
     }
