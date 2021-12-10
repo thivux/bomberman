@@ -10,7 +10,7 @@ import level.Board;
 import java.awt.*;
 
 public class Bomber extends Characters {
-    private Keyboard keyboard;
+    private final Keyboard keyboard;
 
     public Bomber(int x, int y, Board board) {
         super(x, y, board);
@@ -23,51 +23,28 @@ public class Bomber extends Characters {
 
     @Override
     public void update() {
-        int leftX = bounds.x;
-        int rightX = leftX + bounds.width;
-        int topY = bounds.y;
-        int bottomY = topY + bounds.height;
-
         if (keyboard.upPressed) {
             direction = "up";
-            y -= speed;
-            bounds.y -= speed;
-
-            if (board.getTile(leftX / GamePanel.TILE_SIZE, (topY - speed) / GamePanel.TILE_SIZE).collision
-                    || board.getTile(rightX / GamePanel.TILE_SIZE, (topY - speed) / GamePanel.TILE_SIZE).collision) {
-                y += speed;
-                bounds.y += speed;
+            if (canMove("up")) {
+                move("up");
             }
         }
         if (keyboard.downPressed) {
             direction = "down";
-            y += speed;
-            bounds.y += speed;
-
-            if (board.getTile(leftX / GamePanel.TILE_SIZE, (bottomY + speed) / GamePanel.TILE_SIZE).collision
-                    || board.getTile(rightX / GamePanel.TILE_SIZE, (bottomY + speed) / GamePanel.TILE_SIZE).collision) {
-                y -= speed;
-                bounds.y -= speed;
+            if (canMove("down")) {
+                move("down");
             }
         }
         if (keyboard.leftPressed) {
             direction = "left";
-            x -= speed;
-            bounds.x -= speed;
-            if (board.getTile((leftX - speed) / GamePanel.TILE_SIZE, topY / GamePanel.TILE_SIZE).collision
-                    || board.getTile((leftX - speed) / GamePanel.TILE_SIZE, bottomY / GamePanel.TILE_SIZE).collision) {
-                x += speed;
-                bounds.x += speed;
+            if (canMove("left")) {
+                move("left");
             }
         }
         if (keyboard.rightPressed) {
             direction = "right";
-            x += speed;
-            bounds.x += speed;
-            if (board.getTile((rightX + speed) / GamePanel.TILE_SIZE, topY / GamePanel.TILE_SIZE).collision
-                    || board.getTile((rightX + speed) / GamePanel.TILE_SIZE, bottomY / GamePanel.TILE_SIZE).collision) {
-                x -= speed;
-                bounds.x -= speed;
+            if (canMove("right")) {
+                move("right");
             }
         }
 
@@ -107,7 +84,9 @@ public class Bomber extends Characters {
         g2.drawImage(sprite.getImage(), x, y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
 
         //erase comment to see hitbox
+
         //g2.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
         g2.draw(bounds);
+
     }
 }

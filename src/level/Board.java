@@ -2,6 +2,7 @@ package level;
 
 import control.Keyboard;
 import entities.Entity;
+
 import entities.ID;
 import entities.animatedEntities.bomb.Bomb;
 import entities.animatedEntities.characters.Bomber;
@@ -15,6 +16,7 @@ import java.util.List;
 public class Board {
     private GamePanel gamePanel;
     private Keyboard keyboard;
+    private Bomber bomber;
 
     private LevelLoader levelLoader = new LevelLoader(this);
     private Tile[][] tiles;
@@ -76,5 +78,13 @@ public class Board {
 
     public Tile getTile(int col, int row) {
         return tiles[row][col];
+    }
+
+    public Bomber getBomber() {
+        return bomber;
+    }
+
+    public void setBomber(Bomber bomber) {
+        this.bomber = bomber;
     }
 }

@@ -68,7 +68,9 @@ public class LevelLoader {
                         Grass grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
                         board.addStillEntity(grass);
                         board.setTile(j, i, grass);
-                        board.addMovingEntity(new Bomber(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, board));
+                        Bomber bomber = new Bomber(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, board);
+                        board.addMovingEntity(bomber);
+                        board.setBomber(bomber);
                         break;
                     case '1':
                         grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
