@@ -2,6 +2,7 @@ package entities.animatedEntities.characters;
 
 import control.Keyboard;
 import entities.ID;
+import entities.animatedEntities.bomb.Bomb;
 import graphics.Sprite;
 import gui.GamePanel;
 import level.Board;
@@ -15,8 +16,8 @@ public class Bomber extends Characters {
         super(x, y, board);
         this.keyboard = board.getKeyboard();
         id = ID.Bomber;
-        speed = 3;
-        bounds = new Rectangle(x + GamePanel.TILE_SIZE / 6, y + GamePanel.TILE_SIZE / 3, GamePanel.TILE_SIZE / 3 * 2, GamePanel.TILE_SIZE / 3 * 2);
+        speed = 2;
+        bounds = new Rectangle(x, y + GamePanel.TILE_SIZE / 10, GamePanel.TILE_SIZE / 3 * 2, GamePanel.TILE_SIZE / 3 * 2);
         direction = "right";
     }
 
@@ -52,6 +53,15 @@ public class Bomber extends Characters {
         if (keyboard.upPressed || keyboard.downPressed || keyboard.leftPressed || keyboard.rightPressed) {
             animate();
         }
+
+        if (keyboard.spacePressed) {
+//            System.out.println("drop bomb");
+            int xt = ((x + sprite.getSize() / 2) / GamePanel.TILE_SIZE) * GamePanel.TILE_SIZE;
+            int yt = ((y + sprite.getSize() / 2) / GamePanel.TILE_SIZE) * GamePanel.TILE_SIZE; //subtract half player height and minus 1 y position
+//            System.out.println(xt + " " + yt);
+            Bomb bomb = new Bomb(xt, yt, board);
+            board.addMovingEntity(bomb);
+        }
     }
 
     public void draw(Graphics2D g2) {
@@ -74,6 +84,9 @@ public class Bomber extends Characters {
         g2.drawImage(sprite.getImage(), x, y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
 
         //erase comment to see hitbox
-        g2.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
+
+        //g2.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
+        g2.draw(bounds);
+
     }
 }

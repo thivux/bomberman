@@ -2,6 +2,9 @@ package level;
 
 import control.Keyboard;
 import entities.Entity;
+
+import entities.ID;
+import entities.animatedEntities.bomb.Bomb;
 import entities.animatedEntities.characters.Bomber;
 import entities.tiles.Tile;
 import gui.GamePanel;
@@ -28,6 +31,7 @@ public class Board {
         tiles = new Tile[levelLoader.getHeight()][levelLoader.getWidth()];
         levelLoader.createLevel();
 
+//        System.out.println(getTile(4, 3).getClass());
 //        for (int i = 0; i < tiles.length; i++) {
 //            for (int j = 0; j < tiles[0].length; j++) {
 //                System.out.print(tiles[i][j].getId() + " ");
@@ -37,27 +41,31 @@ public class Board {
     }
 
     public void update() {
-        for (Entity entity : movingEntities) {
-            entity.update();
+        for (int i = 0; i < movingEntities.size(); i++) {
+            movingEntities.get(i).update();
         }
     }
 
     public void draw(Graphics2D g2) {
-        for (Entity entity : stillEntities) {
-            entity.draw(g2);
+        for (int i = 0; i < stillEntities.size(); i++) {
+            stillEntities.get(i).draw(g2);
         }
 
-        for (Entity entity : movingEntities) {
-            entity.draw(g2);
+        for (int i = 0; i < movingEntities.size(); i++) {
+            movingEntities.get(i).draw(g2);
         }
     }
 
-    void addStillEntity(Entity entity) {
+    public void addStillEntity(Entity entity) {
         stillEntities.add(entity);
     }
 
-    void addMovingEntity(Entity entity) {
+    public void addMovingEntity(Entity entity) {
         movingEntities.add(entity);
+    }
+
+    public void removeMovingEntity(Entity entity) {
+        movingEntities.remove(entity);
     }
 
     public Keyboard getKeyboard() {
@@ -68,8 +76,8 @@ public class Board {
         tiles[col][row] = tile;
     }
 
-    public Tile getTile(int row, int col) {
-        return tiles[col][row];
+    public Tile getTile(int col, int row) {
+        return tiles[row][col];
     }
 
     public Bomber getBomber() {
