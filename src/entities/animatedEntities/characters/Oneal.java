@@ -21,6 +21,9 @@ public class Oneal extends Characters {
     }
 
     public void update() {
+        if (!alive) {
+            afterKill();
+        }
         //AI here
         if (Math.abs(board.getBomber().getX() - this.x) < GamePanel.TILE_SIZE * RANGE && Math.abs(board.getBomber().getY() - this.y) < GamePanel.TILE_SIZE * RANGE) {
             if (board.getBomber().getX() > this.x) {
@@ -106,23 +109,29 @@ public class Oneal extends Characters {
     }
 
     public void draw(Graphics2D g2) {
-        switch (direction) {
-            case "up":
-            case "left":
-                sprite = Sprite.movingSprite(Sprite.oneal_left1, Sprite.oneal_left2, Sprite.oneal_left3, _animate, 30);
-                break;
-            case "down":
-            case "right":
-                sprite = Sprite.movingSprite(Sprite.oneal_right1, Sprite.oneal_right2, Sprite.oneal_right3, _animate, 30);
-                break;
-            default:
+        if (alive) {
+            switch (direction) {
+                case "up":
+                case "left":
+                    sprite = Sprite.movingSprite(Sprite.oneal_left1, Sprite.oneal_left2, Sprite.oneal_left3, _animate, 30);
+                    break;
+                case "down":
+                case "right":
+                    sprite = Sprite.movingSprite(Sprite.oneal_right1, Sprite.oneal_right2, Sprite.oneal_right3, _animate, 30);
+                    break;
+                default:
+            }
+
+        } else {
+            if(afterKill > 0) {
+                sprite = Sprite.oneal_dead;
+                _animate = 0;
+            } else { // final animation
+                sprite = Sprite.movingSprite(Sprite.mob_dead1, Sprite.mob_dead2, Sprite.mob_dead3, _animate, 60);
+            }
         }
+
         g2.drawImage(sprite.getImage(), x, y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
         //g2.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
     }
-//
-//    @Override
-//    public void kill() {
-//
-//    }
 }

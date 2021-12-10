@@ -13,6 +13,7 @@ public abstract class Characters extends AnimatedEntity {
     protected String direction;
     protected boolean alive;
     protected int afterKill = 20;
+    protected int finalAnimation = 30;
 
     public Characters(int x, int y, Board board) {
         super(x, y);
@@ -71,15 +72,18 @@ public abstract class Characters extends AnimatedEntity {
     }
 
     //    public abstract void kill();
-    protected void kill() {
+    public void kill() {
         alive = false;
     }
 
-    protected void afterKill() {
+    public void afterKill() {
         if (afterKill > 0) {
             afterKill--;
         } else {
-            remove();
+            if (finalAnimation > 0)
+                finalAnimation--;
+            else
+                remove();
         }
     }
 }

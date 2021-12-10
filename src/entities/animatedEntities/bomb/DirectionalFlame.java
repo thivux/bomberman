@@ -32,7 +32,7 @@ public class DirectionalFlame extends Entity {
         int yy = (y + GamePanel.TILE_SIZE / 2) / GamePanel.TILE_SIZE;
 
         for (int i = 0; i < flames.length; i++) {
-            last = (i == flames.length - 1) ? true : false;
+            last = i == flames.length - 1;
 
             switch (direction) {
                 case "up":
@@ -92,7 +92,9 @@ public class DirectionalFlame extends Entity {
 
     @Override
     public void update() {
-
+        for (int i = 0; i < flames.length; i++) {
+            flames[i].update();
+        }
     }
 
     @Override

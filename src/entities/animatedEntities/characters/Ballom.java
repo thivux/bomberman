@@ -20,6 +20,9 @@ public class Ballom extends Characters {
     }
 
     public void update() {
+        if (!alive) {
+            afterKill();
+        }
         //AI here
         Random random = new Random();
         if (steps <= 0) {
@@ -85,16 +88,25 @@ public class Ballom extends Characters {
     }
 
     public void draw(Graphics2D g2) {
-        switch (direction) {
-            case "up":
-            case "left":
-                sprite = Sprite.movingSprite(Sprite.balloom_left1, Sprite.balloom_left2, Sprite.balloom_left3, _animate, 30);
-                break;
-            case "down":
-            case "right":
-                sprite = Sprite.movingSprite(Sprite.balloom_right1, Sprite.balloom_right2, Sprite.balloom_right3, _animate, 30);
-                break;
-            default:
+        if (alive) {
+            switch (direction) {
+                case "up":
+                case "left":
+                    sprite = Sprite.movingSprite(Sprite.balloom_left1, Sprite.balloom_left2, Sprite.balloom_left3, _animate, 30);
+                    break;
+                case "down":
+                case "right":
+                    sprite = Sprite.movingSprite(Sprite.balloom_right1, Sprite.balloom_right2, Sprite.balloom_right3, _animate, 30);
+                    break;
+                default:
+            }
+        } else {
+            if (afterKill > 0) {
+                sprite = Sprite.balloom_dead;
+                _animate = 0;
+            } else { // finalAnimation
+                sprite = Sprite.movingSprite(Sprite.mob_dead1, Sprite.mob_dead2, Sprite.mob_dead3, _animate, 60);
+            }
         }
         g2.drawImage(sprite.getImage(), x, y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
         //g2.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);

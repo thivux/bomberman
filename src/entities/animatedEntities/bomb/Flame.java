@@ -1,6 +1,7 @@
 package entities.animatedEntities.bomb;
 
 import entities.Entity;
+import entities.animatedEntities.AnimatedEntity;
 import graphics.Sprite;
 import gui.GamePanel;
 import level.Board;
@@ -18,28 +19,28 @@ public class Flame extends Entity {
 
         switch (direction) {
             case "up":
-                if (last == false) {
+                if (!last) {
                     sprite = Sprite.explosion_vertical2;
                 } else {
                     sprite = Sprite.explosion_vertical_top_last2;
                 }
                 break;
             case "right":
-                if (last == false) {
+                if (!last) {
                     sprite = Sprite.explosion_horizontal2;
                 } else {
                     sprite = Sprite.explosion_horizontal_right_last2;
                 }
                 break;
             case "down":
-                if (last == false) {
+                if (!last) {
                     sprite = Sprite.explosion_vertical2;
                 } else {
                     sprite = Sprite.explosion_vertical_down_last2;
                 }
                 break;
             case "left":
-                if (last == false) {
+                if (!last) {
                     sprite = Sprite.explosion_horizontal2;
                 } else {
                     sprite = Sprite.explosion_horizontal_left_last2;
@@ -50,7 +51,18 @@ public class Flame extends Entity {
 
     @Override
     public void update() {
+        collide();
+    }
 
+    public void collide() {
+        for (int i = 0; i < board.movingEntities.size(); i++) {
+            Entity that = board.movingEntities.get(i);
+            if (!that.getClass().equals(Flame.class) && this.getBounds().intersects(that.getBounds())) {
+                if (that instanceof AnimatedEntity) {
+                    ((AnimatedEntity) that).kill();
+                }
+            }
+        }
     }
 
     @Override
