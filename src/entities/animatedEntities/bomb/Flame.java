@@ -57,8 +57,11 @@ public class Flame extends Entity {
     public void collide() {
         for (int i = 0; i < board.movingEntities.size(); i++) {
             Entity that = board.movingEntities.get(i);
-            if (!that.getClass().equals(Flame.class) && this.getBounds().intersects(that.getBounds())) {
-                if (that instanceof AnimatedEntity) {
+            if (this.getBounds().intersects(that.getBounds())) {
+                if (that instanceof Bomb) { // case 1: flame vs bomb
+                    Bomb bomb = (Bomb) that;
+                    if (bomb.timeToExplode > 0) bomb.explode();
+                } else {    // case 2: flame vs characters
                     ((AnimatedEntity) that).kill();
                 }
             }
