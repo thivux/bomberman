@@ -17,28 +17,30 @@ public class Oneal extends Characters {
         sprite = Sprite.oneal_left1;
         id = ID.Oneal;
         speed = 2;
-        bounds = new Rectangle(x, y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE);
         direction = "right";
     }
 
     public void update() {
+        if (!alive) {
+            afterKill();
+        }
         //AI here
         if (Math.abs(board.getBomber().getX() - this.x) < GamePanel.TILE_SIZE * RANGE && Math.abs(board.getBomber().getY() - this.y) < GamePanel.TILE_SIZE * RANGE) {
             if (board.getBomber().getX() > this.x) {
-                if (canMove("right")) {
+                if (canMovePassTile("right")) {
                     move("right");
                 }
             } else if (board.getBomber().getX() < this.x) {
-                if (canMove("left")) {
+                if (canMovePassTile("left")) {
                     move("left");
                 }
             }
             if (board.getBomber().getY() > this.y) {
-                if (canMove("down")) {
+                if (canMovePassTile("down")) {
                     move("down");
                 }
             } else if (board.getBomber().getY() < this.y) {
-                if (canMove("up")) {
+                if (canMovePassTile("up")) {
                     move("up");
                 }
             }
@@ -46,28 +48,28 @@ public class Oneal extends Characters {
             Random random = new Random();
             if (steps <= 0) {
                 boolean moved = false;
-                while ((canMove("up") || canMove("down") || canMove("left") || canMove("right")) && !moved) {
+                while ((canMovePassTile("up") || canMovePassTile("down") || canMovePassTile("left") || canMovePassTile("right")) && !moved) {
                     switch (random.nextInt(4)) {
                         case 0:
-                            if (canMove("up")) {
+                            if (canMovePassTile("up")) {
                                 direction = "up";
                                 moved = true;
                                 break;
                             }
                         case 1:
-                            if (canMove("down")) {
+                            if (canMovePassTile("down")) {
                                 direction = "down";
                                 moved = true;
                                 break;
                             }
                         case 2:
-                            if (canMove("left")) {
+                            if (canMovePassTile("left")) {
                                 direction = "left";
                                 moved = true;
                                 break;
                             }
                         case 3:
-                            if (canMove("right")) {
+                            if (canMovePassTile("right")) {
                                 direction = "right";
                                 moved = true;
                                 break;
@@ -79,22 +81,22 @@ public class Oneal extends Characters {
             } else {
                 switch (direction) {
                     case "up":
-                        if (canMove("up")) {
+                        if (canMovePassTile("up")) {
                             move("up");
                         }
                         break;
                     case "down":
-                        if (canMove("down")) {
+                        if (canMovePassTile("down")) {
                             move("down");
                         }
                         break;
                     case "left":
-                        if (canMove("left")) {
+                        if (canMovePassTile("left")) {
                             move("left");
                         }
                         break;
                     case "right":
-                        if (canMove("right")) {
+                        if (canMovePassTile("right")) {
                             move("right");
                         }
                         break;
@@ -107,17 +109,28 @@ public class Oneal extends Characters {
     }
 
     public void draw(Graphics2D g2) {
-        switch (direction) {
-            case "up":
-            case "left":
-                sprite = Sprite.movingSprite(Sprite.oneal_left1, Sprite.oneal_left2, Sprite.oneal_left3, _animate, 30);
-                break;
-            case "down":
-            case "right":
-                sprite = Sprite.movingSprite(Sprite.oneal_right1, Sprite.oneal_right2, Sprite.oneal_right3, _animate, 30);
-                break;
-            default:
+        if (alive) {
+            switch (direction) {
+                case "up":
+                case "left":
+                    sprite = Sprite.movingSprite(Sprite.oneal_left1, Sprite.oneal_left2, Sprite.oneal_left3, _animate, 30);
+                    break;
+                case "down":
+                case "right":
+                    sprite = Sprite.movingSprite(Sprite.oneal_right1, Sprite.oneal_right2, Sprite.oneal_right3, _animate, 30);
+                    break;
+                default:
+            }
+
+        } else {
+            if(afterKill > 0) {
+                sprite = Sprite.oneal_dead;
+                _animate = 0;
+            } else { // final animation
+                sprite = Sprite.movingSprite(Sprite.mob_dead1, Sprite.mob_dead2, Sprite.mob_dead3, _animate, 60);
+            }
         }
+
         g2.drawImage(sprite.getImage(), x, y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
         //g2.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
     }

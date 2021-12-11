@@ -121,6 +121,10 @@ public class GamePanel extends JPanel implements Runnable {
         return bombRadius;
     }
 
+    public static void setBombRadius(int bombRadius) {
+        GamePanel.bombRadius = bombRadius;
+    }
+
     public static double getSpeed() {
         return speed;
     }

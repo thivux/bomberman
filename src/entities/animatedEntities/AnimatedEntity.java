@@ -15,4 +15,5 @@ public abstract class AnimatedEntity extends Entity {
         else _animate = 0;
     }
 
+    public abstract void kill();
 }
