@@ -62,21 +62,33 @@ public class Ballom extends Characters {
                 case "up":
                     if (canMovePassTile("up")) {
                         move("up");
+                        if (enemyCollision()) {
+                            move("down");
+                        }
                     }
                     break;
                 case "down":
                     if (canMovePassTile("down")) {
                         move("down");
+                        if (enemyCollision()) {
+                            move("up");
+                        }
                     }
                     break;
                 case "left":
                     if (canMovePassTile("left")) {
                         move("left");
+                        if (enemyCollision()) {
+                            move("right");
+                        }
                     }
                     break;
                 case "right":
                     if (canMovePassTile("right")) {
                         move("right");
+                        if (enemyCollision()) {
+                            move("left");
+                        }
                     }
                     break;
                 default:
@@ -109,11 +121,5 @@ public class Ballom extends Characters {
             }
         }
         g2.drawImage(sprite.getImage(), x, y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
-        //g2.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
     }
-//
-//    @Override
-//    public void kill() {
-//
-//    }
 }
