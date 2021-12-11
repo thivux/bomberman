@@ -25,7 +25,7 @@ public abstract class Characters extends AnimatedEntity {
 
     public abstract void draw(Graphics2D g2);
 
-    public boolean canMove(String direction) {
+    public boolean canMovePassTile(String direction) {
         int leftX = bounds.x;
         int rightX = leftX + bounds.width - 1;
         int topY = bounds.y;

@@ -19,7 +19,7 @@ public class Board {
     private Bomber bomber;
 
     private LevelLoader levelLoader = new LevelLoader(this);
-    private Entity[][] tiles;
+    private Tile[][] tiles;
 
     public List<Entity> movingEntities = new ArrayList<>();
     public List<Entity> stillEntities = new ArrayList<>();
@@ -28,7 +28,7 @@ public class Board {
         this.gamePanel = gamePanel;
         keyboard = gamePanel.getKeyboard();
         levelLoader.loadFile();
-        tiles = new Entity[levelLoader.getHeight()][levelLoader.getWidth()];
+        tiles = new Tile[levelLoader.getHeight()][levelLoader.getWidth()];
         levelLoader.createLevel();
 
 //        System.out.println(getTile(4, 3).getClass());
@@ -72,11 +72,11 @@ public class Board {
         return keyboard;
     }
 
-    public void setTile(int row, int col, Entity tile) {
+    public void setTile(int row, int col, Tile tile) {
         tiles[col][row] = tile;
     }
 
-    public Entity getTile(int col, int row) {
+    public Tile getTile(int col, int row) {
         return tiles[row][col];
     }
 

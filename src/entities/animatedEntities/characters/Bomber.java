@@ -12,6 +12,7 @@ import java.awt.*;
 
 public class Bomber extends Characters {
     private final Keyboard keyboard;
+    private int lives = 3;
 
     public Bomber(int x, int y, Board board) {
         super(x, y, board);
@@ -30,33 +31,38 @@ public class Bomber extends Characters {
 
         if (keyboard.upPressed) {
             direction = "up";
-            if (canMove("up")) {
+            if (canMovePassTile("up")) {
                 move("up");
-                collide();
-
+                if (!canMovePassMovingEntities()) {
+                    move("down");
+                }
             }
         }
         if (keyboard.downPressed) {
             direction = "down";
-            if (canMove("down")) {
+            if (canMovePassTile("down")) {
                 move("down");
-                collide();
+                if (!canMovePassMovingEntities()) {
+                    move("up");
+                }
             }
         }
         if (keyboard.leftPressed) {
             direction = "left";
-            if (canMove("left")) {
+            if (canMovePassTile("left")) {
                 move("left");
-                collide();
-
+                if (!canMovePassMovingEntities()) {
+                    move("right");
+                }
             }
         }
         if (keyboard.rightPressed) {
             direction = "right";
-            if (canMove("right")) {
+            if (canMovePassTile("right")) {
                 move("right");
-                collide();
-
+                if (!canMovePassMovingEntities()) {
+                    move("left");
+                }
             }
         }
 
@@ -66,25 +72,27 @@ public class Bomber extends Characters {
         }
 
         if (keyboard.spacePressed) {
-//            System.out.println("drop bomb");
             int xt = ((x + sprite.getSize() / 2) / GamePanel.TILE_SIZE) * GamePanel.TILE_SIZE;
             int yt = ((y + sprite.getSize() / 2) / GamePanel.TILE_SIZE) * GamePanel.TILE_SIZE; //subtract half player height and minus 1 y position
-//            System.out.println(xt + " " + yt);
             Bomb bomb = new Bomb(xt, yt, board);
             board.addMovingEntity(bomb);
-            board.setTile(xt / GamePanel.TILE_SIZE, yt / GamePanel.TILE_SIZE, bomb);
+            System.out.println();
         }
     }
 
-    public void collide() {
+    public boolean canMovePassMovingEntities() {
         for (int i = 0; i < board.movingEntities.size(); i++) {
             Entity that = board.movingEntities.get(i);
             if (this.getClass() != that.getClass() && this.getBounds().intersects(that.getBounds())) {
-                if (!that.getClass().equals(Bomb.class)) {
+                if (!that.getClass().equals(Bomb.class)) {  // collide with enemies
                     kill();
+                    return false;
+                } else {                                    // collide with bomb
+                    return ((Bomb) that).intersectWithBomber;
                 }
             }
         }
+        return true;
     }
 
     public void draw(Graphics2D g2) {
@@ -119,5 +127,13 @@ public class Bomber extends Characters {
         // erase comment to see hitbox
         g2.draw(bounds);
 
+    }
+
+    @Override
+    public void kill() {
+        if (lives > 1) {
+            lives--;
+        } else
+            super.kill();
     }
 }

@@ -27,28 +27,28 @@ public class Ballom extends Characters {
         Random random = new Random();
         if (steps <= 0) {
             boolean moved = false;
-            while ((canMove("up") || canMove("down") || canMove("left") || canMove("right")) && !moved) {
+            while ((canMovePassTile("up") || canMovePassTile("down") || canMovePassTile("left") || canMovePassTile("right")) && !moved) {
                 switch (random.nextInt(4)) {
                     case 0:
-                        if (canMove("up")) {
+                        if (canMovePassTile("up")) {
                             direction = "up";
                             moved = true;
                             break;
                         }
                     case 1:
-                        if (canMove("down")) {
+                        if (canMovePassTile("down")) {
                             direction = "down";
                             moved = true;
                             break;
                         }
                     case 2:
-                        if (canMove("left")) {
+                        if (canMovePassTile("left")) {
                             direction = "left";
                             moved = true;
                             break;
                         }
                     case 3:
-                        if (canMove("right")) {
+                        if (canMovePassTile("right")) {
                             direction = "right";
                             moved = true;
                             break;
@@ -60,22 +60,22 @@ public class Ballom extends Characters {
         } else {
             switch (direction) {
                 case "up":
-                    if (canMove("up")) {
+                    if (canMovePassTile("up")) {
                         move("up");
                     }
                     break;
                 case "down":
-                    if (canMove("down")) {
+                    if (canMovePassTile("down")) {
                         move("down");
                     }
                     break;
                 case "left":
-                    if (canMove("left")) {
+                    if (canMovePassTile("left")) {
                         move("left");
                     }
                     break;
                 case "right":
-                    if (canMove("right")) {
+                    if (canMovePassTile("right")) {
                         move("right");
                     }
                     break;

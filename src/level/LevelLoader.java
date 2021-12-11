@@ -26,7 +26,7 @@ public class LevelLoader {
 
     public void loadFile() {
         try {
-            BufferedReader br = new BufferedReader(new FileReader("res\\levels\\Level1.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("res\\levels\\TestLevel.txt"));
             String[] option = br.readLine().split(" ");
             level = Integer.parseInt(option[0]);
             height = Integer.parseInt(option[1]);

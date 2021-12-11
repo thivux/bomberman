@@ -2,9 +2,6 @@ package entities.animatedEntities.bomb;
 
 import entities.Entity;
 import entities.animatedEntities.AnimatedEntity;
-import entities.animatedEntities.characters.Ballom;
-import entities.tiles.Grass;
-import entities.tiles.Tile;
 import graphics.Sprite;
 import gui.GamePanel;
 import level.Board;
@@ -13,32 +10,40 @@ import java.awt.*;
 
 public class Bomb extends AnimatedEntity {
     Board board;
-    private int timeToExplode = 120;
+    private int timeToExplode = 1200000;
     private boolean exploded = false;
     private int afterExplosion = 20;
     private DirectionalFlame[] DirectionalFlames;
+    public boolean intersectWithBomber = true;
 
     public Bomb(int x, int y, Board board) {
         super(x, y);
         this.sprite = Sprite.bomb;
         this.board = board;
         collision = true;
+//        bounds = new Rectangle(x, y, GamePanel.TILE_SIZE + 2, GamePanel.TILE_SIZE + 2);
     }
 
     @Override
     public void update() {
+        if (intersectWithBomber) {
+            if (!this.bounds.intersects(board.getBomber().getBounds())) {
+                intersectWithBomber = false;
+            }
+        }
+
         if (timeToExplode > 0) {
             timeToExplode--;
         } else {    // time out
             if (!exploded) {
-                exploded = true;
                 displayExplosion();
+                exploded = true;
             } else {
                 if (afterExplosion > 0) {
                     afterExplosion--;
                 } else {
                     remove();
-                    board.setTile(x / GamePanel.TILE_SIZE, y / GamePanel.TILE_SIZE, new Grass(x, y));
+//                    board.setTile(x / GamePanel.TILE_SIZE, y / GamePanel.TILE_SIZE, new Grass(x, y));
                 }
             }
         }
@@ -75,14 +80,16 @@ public class Bomb extends AnimatedEntity {
     public void draw(Graphics2D g2) {
         if (!exploded) {    // draw bomb
             sprite = Sprite.movingSprite(Sprite.bomb, Sprite.bomb_1, Sprite.bomb_2, _animate, 60);
-        } else {            // draw flame
-            sprite =  Sprite.bomb_exploded2;
-            for (int i = 0; i < DirectionalFlames.length; i++) {
-                DirectionalFlames[i].draw(g2);
+        } else if (afterExplosion > 0) {            // draw flame
+            sprite = Sprite.bomb_exploded2;
+            if (afterExplosion > 0) {
+                for (int i = 0; i < DirectionalFlames.length; i++) {
+                    DirectionalFlames[i].draw(g2);
+                }
             }
         }
 
-        g2.drawImage(sprite.getImage(),x ,y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
+        g2.drawImage(sprite.getImage(), x, y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
         g2.draw(bounds);
     }
 
