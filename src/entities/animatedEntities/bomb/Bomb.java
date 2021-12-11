@@ -10,7 +10,7 @@ import java.awt.*;
 
 public class Bomb extends AnimatedEntity {
     Board board;
-    private int timeToExplode = 1200000;
+    private int timeToExplode = 120;
     private boolean exploded = false;
     private int afterExplosion = 20;
     private DirectionalFlame[] DirectionalFlames;

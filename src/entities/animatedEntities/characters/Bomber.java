@@ -13,6 +13,7 @@ import java.awt.*;
 public class Bomber extends Characters {
     private final Keyboard keyboard;
     private int lives = 3;
+    private int timeBetweenBombsLeft = 0;
 
     public Bomber(int x, int y, Board board) {
         super(x, y, board);
@@ -25,6 +26,10 @@ public class Bomber extends Characters {
 
     @Override
     public void update() {
+        if (timeBetweenBombsLeft > 0) {
+            timeBetweenBombsLeft--;
+        }
+
         if (!alive) {
             afterKill();
         }
@@ -72,11 +77,16 @@ public class Bomber extends Characters {
         }
 
         if (keyboard.spacePressed) {
-            int xt = ((x + sprite.getSize() / 2) / GamePanel.TILE_SIZE) * GamePanel.TILE_SIZE;
-            int yt = ((y + sprite.getSize() / 2) / GamePanel.TILE_SIZE) * GamePanel.TILE_SIZE; //subtract half player height and minus 1 y position
-            Bomb bomb = new Bomb(xt, yt, board);
-            board.addMovingEntity(bomb);
-            System.out.println();
+            if (timeBetweenBombsLeft > 0) {
+                System.out.println("wait ik");
+            } else {
+                timeBetweenBombsLeft = GamePanel.timeBetweenBombs;
+                int xt = ((x + sprite.getSize() / 2) / GamePanel.TILE_SIZE) * GamePanel.TILE_SIZE;
+                int yt = ((y + sprite.getSize() / 2) / GamePanel.TILE_SIZE) * GamePanel.TILE_SIZE; //subtract half player height and minus 1 y position
+                Bomb bomb = new Bomb(xt, yt, board);
+                board.addMovingEntity(bomb);
+                System.out.println();
+            }
         }
     }
 

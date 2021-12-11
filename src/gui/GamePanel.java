@@ -30,6 +30,7 @@ public class GamePanel extends JPanel implements Runnable {
     private static int bombRadius = BOMBRADIUS;
     private static double speed = SPEED;
 
+    public static int timeBetweenBombs = 240;
 
     //FPS
     public final static int FPS = 60;
