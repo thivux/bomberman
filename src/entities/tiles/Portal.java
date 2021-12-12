@@ -22,8 +22,7 @@ public class Portal extends Tile {
         if (board.movingEntities.size() == 1) {
             collision = false;
             if (bounds.intersects(this.board.getBomber().getBounds())) {
-                System.out.println("win");
-                // TODO: win!
+//                System.out.println("win");
                 board.nextLevel();
             }
         }
