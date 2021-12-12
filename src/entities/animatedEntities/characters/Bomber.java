@@ -16,6 +16,12 @@ public class Bomber extends Characters {
     private int timeBetweenBombs = 0; // no bomb when start
     private int timeBetweenDeath = 0;
 
+    private int timeToPlaySELeft = 0;
+    private int timeToPlaySERight = 0;
+    private int timeToPlaySEUp = 0;
+    private int timeToPlaySEDown = 0;
+    private int timeToPlaySE = 15;
+
     public Bomber(int x, int y, Board board) {
         super(x, y, board);
         this.keyboard = board.getKeyboard();
@@ -42,6 +48,12 @@ public class Bomber extends Characters {
                 if (!canMovePassMovingEntities()) {
                     move("down");
                 }
+                if (timeToPlaySEUp > 0) {
+                    timeToPlaySEUp--;
+                } else {
+                    GamePanel.playSE(5);
+                    timeToPlaySEUp = timeToPlaySE;
+                }
             }
         }
         if (keyboard.downPressed) {
@@ -51,7 +63,12 @@ public class Bomber extends Characters {
                 if (!canMovePassMovingEntities()) {
                     move("up");
                 }
-            }
+                if (timeToPlaySEDown > 0) {
+                    timeToPlaySEDown--;
+                } else {
+                    GamePanel.playSE(5);
+                    timeToPlaySEDown = timeToPlaySE;
+                }            }
         }
         if (keyboard.leftPressed) {
             direction = "left";
@@ -59,6 +76,12 @@ public class Bomber extends Characters {
                 move("left");
                 if (!canMovePassMovingEntities()) {
                     move("right");
+                }
+                if (timeToPlaySELeft > 0) {
+                    timeToPlaySELeft--;
+                } else {
+                    GamePanel.playSE(6);
+                    timeToPlaySELeft = timeToPlaySE;
                 }
             }
         }
@@ -68,6 +91,12 @@ public class Bomber extends Characters {
                 move("right");
                 if (!canMovePassMovingEntities()) {
                     move("left");
+                }
+                if (timeToPlaySERight > 0) {
+                    timeToPlaySERight--;
+                } else {
+                    GamePanel.playSE(6);
+                    timeToPlaySERight = timeToPlaySE;
                 }
             }
         }
@@ -83,9 +112,9 @@ public class Bomber extends Characters {
                 int xt = ((x + sprite.getSize() / 2) / GamePanel.TILE_SIZE) * GamePanel.TILE_SIZE;
                 int yt = ((y + sprite.getSize() / 2) / GamePanel.TILE_SIZE) * GamePanel.TILE_SIZE;
                 Bomb bomb = new Bomb(xt, yt, board);
+                GamePanel.playSE(1);
                 board.addMovingEntity(bomb);
                 numberOfBombs++;
-//                System.out.println("added");
             }
         }
     }
@@ -143,10 +172,7 @@ public class Bomber extends Characters {
     public void kill() {
         if (timeBetweenDeath > 0) return;
         super.kill();
-//        System.out.println("lives: " + GamePanel.getLives());
         GamePanel.decreaseLives();
-//        System.out.println(GamePanel.getLives() + " left");
-//        if (GamePanel.getLives() == 0)
         timeBetweenDeath = 120;
     }
 
@@ -160,6 +186,8 @@ public class Bomber extends Characters {
                 remove();
                 if (GamePanel.getLives() > 0) {
                     board.restartLevel();
+                } else {
+                    GamePanel.playSE(8);
                 }
             }
         }

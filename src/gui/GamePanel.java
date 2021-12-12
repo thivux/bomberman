@@ -44,12 +44,15 @@ public class GamePanel extends JPanel implements Runnable {
     private Board board = new Board(this);
     private Camera camera = new Camera(0, 0);
 
+    private static Sound sound = new Sound();
+
     public GamePanel() {
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyboard);
         setFocusable(true);
+        playMusic(0);
     }
 
     public void start() {
@@ -168,5 +171,20 @@ public class GamePanel extends JPanel implements Runnable {
 
     public static void addBombRate() {
         bombRate++;
+    }
+
+    public void playMusic(int idx) {
+        sound.setFile(idx);
+        sound.play();
+        sound.loop();
+    }
+
+    public void stopMusic() {
+        sound.stop();
+    }
+
+    public static void playSE(int idx) {
+        sound.setFile(idx);
+        sound.play();
     }
 }
