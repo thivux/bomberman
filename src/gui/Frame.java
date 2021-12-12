@@ -9,7 +9,7 @@ public class Frame extends JFrame {
 
     public Frame() {
         gamePanel = new GamePanel();
-        infoPanel = new InfoPanel();
+        infoPanel = new InfoPanel(gamePanel);
 
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

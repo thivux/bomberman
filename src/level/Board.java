@@ -5,6 +5,7 @@ import entities.Entity;
 import entities.animatedEntities.characters.Bomber;
 import entities.tiles.Tile;
 import gui.GamePanel;
+import gui.InfoPanel;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -28,16 +29,12 @@ public class Board {
         tiles = new Tile[levelLoader.getHeight()][levelLoader.getWidth()];
         levelLoader.createLevel();
 
-//        System.out.println(getTile(4, 3).getClass());
-//        for (int i = 0; i < tiles.length; i++) {
-//            for (int j = 0; j < tiles[0].length; j++) {
-//                System.out.print(tiles[i][j].getId() + " ");
-//            }
-//            System.out.println();
-//        }
     }
 
     public void update() {
+        InfoPanel.updateLevel();
+        InfoPanel.updateLives();
+        InfoPanel.updateScores();
         for (int i = 0; i < stillEntities.size(); i++) {
             stillEntities.get(i).update();
         }

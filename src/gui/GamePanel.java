@@ -4,6 +4,8 @@ import control.Camera;
 import control.Keyboard;
 import entities.Entity;
 import entities.ID;
+import entities.animatedEntities.bomb.Bomb;
+import entities.animatedEntities.characters.Bomber;
 import level.Board;
 
 import javax.swing.*;
@@ -30,7 +32,11 @@ public class GamePanel extends JPanel implements Runnable {
     private static int bombRadius = BOMBRADIUS;
     private static double speed = SPEED;
 
-    public static int timeBetweenBombs = 240;
+    public static int timeBetweenBombs = 200;
+
+    private static int level = 0;
+    private static int lives = 3;
+    private static int score = 0;
 
     //FPS
     public final static int FPS = 60;
@@ -86,6 +92,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
+
         for (int i = 0; i < board.movingEntities.size(); i++) {
             Entity entity = board.movingEntities.get(i);
             if (entity.getId() == ID.Bomber) {   // camera move according to bomber pos
@@ -93,6 +100,9 @@ public class GamePanel extends JPanel implements Runnable {
             }
             if (entity.isRemoved()) {
                 board.removeMovingEntity(entity);
+                if (!(entity instanceof Bomber) && !(entity instanceof Bomb)) {
+                    increaseScore();
+                }
             }
         }
         board.update();
@@ -128,5 +138,33 @@ public class GamePanel extends JPanel implements Runnable {
 
     public static double getSpeed() {
         return speed;
+    }
+
+    public void nextLevel() {
+        level++;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void increaseScore() {
+        score += 100;
+    }
+
+    public void resetScore() {
+        score = 0;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public static int getLives() {
+        return lives;
+    }
+
+    public static void decreaseLives() {
+        lives--;
     }
 }
