@@ -1,6 +1,8 @@
 package entities.animatedEntities.bomb;
 
 import entities.Entity;
+import entities.LayeredEntity;
+import entities.tiles.Brick;
 import gui.GamePanel;
 import level.Board;
 
@@ -49,7 +51,6 @@ public class DirectionalFlame extends Entity {
                     break;
             }
             flames[i] = new Flame(xx * GamePanel.TILE_SIZE, yy * GamePanel.TILE_SIZE, direction, last, board);
-//            board.addStillEntity(flames[i]);
         }
     }
 
@@ -59,8 +60,6 @@ public class DirectionalFlame extends Entity {
         int xTile = (x + GamePanel.TILE_SIZE / 2) / GamePanel.TILE_SIZE;
         int yTile = (y + GamePanel.TILE_SIZE / 2) / GamePanel.TILE_SIZE;
 
-//        System.out.println(x + " " + y);
-//        System.out.println(xTile + " " + yTile);
 
         while (radiusCount < radius) {
             switch (direction) {
@@ -81,8 +80,12 @@ public class DirectionalFlame extends Entity {
                     break;
             }
 
-//            System.out.print(direction + ": " + xTile + " " + yTile + " " + board.getTile(xTile, yTile).getClass() + " ");
-            if (board.getTile(xTile, yTile).collision) break;
+            if (board.getTile(xTile, yTile).collision) {
+                if (board.getTile(xTile, yTile) instanceof LayeredEntity) {
+                    ((LayeredEntity) board.getTile(xTile, yTile)).getTopEntity().remove();
+                }
+                break;
+            }
 
             radiusCount++;
         }
