@@ -32,8 +32,6 @@ public class GamePanel extends JPanel implements Runnable {
     private static int bombRadius = BOMBRADIUS;
     private static double speed = SPEED;
 
-    public static int timeBetweenBombs = 200;
-
     private static int level = 0;
     private static int lives = 3;
     private static int score = 0;
@@ -166,5 +164,9 @@ public class GamePanel extends JPanel implements Runnable {
 
     public static void decreaseLives() {
         lives--;
+    }
+
+    public static void addBombRate() {
+        bombRate++;
     }
 }

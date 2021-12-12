@@ -12,9 +12,8 @@ import java.awt.*;
 
 public class Bomber extends Characters {
     private final Keyboard keyboard;
-
-    private int timeBetweenBombsLeft = 0;
-
+    private int numberOfBombs = 0;
+    private int timeBetweenBombs = 0; // no bomb when start
 
     public Bomber(int x, int y, Board board) {
         super(x, y, board);
@@ -27,9 +26,8 @@ public class Bomber extends Characters {
 
     @Override
     public void update() {
-
-        if (timeBetweenBombsLeft > 0) {
-            timeBetweenBombsLeft--;
+        if (timeBetweenBombs > 0) {     // bomb dropped
+            timeBetweenBombs--;
         }
 
         if (!alive) {
@@ -79,14 +77,14 @@ public class Bomber extends Characters {
         }
 
         if (keyboard.spacePressed) {
-            if (timeBetweenBombsLeft > 0) {
-//                System.out.println("wait ik");
-            } else {
-                timeBetweenBombsLeft = GamePanel.timeBetweenBombs;
+            if (numberOfBombs < GamePanel.getBombRate() && timeBetweenBombs <= 0) {
+                timeBetweenBombs = 30;
                 int xt = ((x + sprite.getSize() / 2) / GamePanel.TILE_SIZE) * GamePanel.TILE_SIZE;
                 int yt = ((y + sprite.getSize() / 2) / GamePanel.TILE_SIZE) * GamePanel.TILE_SIZE;
                 Bomb bomb = new Bomb(xt, yt, board);
                 board.addMovingEntity(bomb);
+                numberOfBombs++;
+                System.out.println("added");
             }
         }
     }
@@ -154,4 +152,7 @@ public class Bomber extends Characters {
         speed = i;
     }
 
+    public void bombRemoved() {
+        numberOfBombs--;
+    }
 }
