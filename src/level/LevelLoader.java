@@ -1,5 +1,6 @@
 package level;
 
+import entities.LayeredEntity;
 import entities.animatedEntities.characters.Ballom;
 import entities.animatedEntities.characters.Bomber;
 import entities.animatedEntities.characters.Oneal;
@@ -58,18 +59,22 @@ public class LevelLoader {
                         board.setTile(j, i, wall);
                         break;
                     case '*':
+                        Grass grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
                         Brick brick = new Brick(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
-                        board.addStillEntity(brick);
-                        board.setTile(j, i, brick);
+                        LayeredEntity layeredEntity = new LayeredEntity(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, grass, brick);
+                        board.addStillEntity(layeredEntity);
+                        board.setTile(j, i, layeredEntity);
                         break;
                     case 'x':
+                        grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
                         Portal portal = new Portal(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
-                        board.addStillEntity(new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i));
-                        board.addStillEntity(portal);
-                        board.setTile(j, i, portal);
+                        //board.addStillEntity(new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i));
+                        layeredEntity = new LayeredEntity(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, grass, portal);
+                        board.addStillEntity(layeredEntity);
+                        board.setTile(j, i, layeredEntity);
                         break;
                     case 'p':
-                        Grass grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
+                        grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
                         board.addStillEntity(grass);
                         board.setTile(j, i, grass);
                         Bomber bomber = new Bomber(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, board);
@@ -90,24 +95,27 @@ public class LevelLoader {
                         break;
                     case 'b':
                         grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
-                        board.addStillEntity(grass);
-                        board.setTile(j, i, grass);
                         PowerupBombs powerupBombs = new PowerupBombs(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, this.board);
-                        board.addStillEntity(powerupBombs);
+                        layeredEntity = new LayeredEntity(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, grass, powerupBombs);
+                        powerupBombs.setLayeredEntity(layeredEntity);
+                        board.addStillEntity(layeredEntity);
+                        board.setTile(j, i, layeredEntity);
                         break;
                     case 'f':
                         grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
-                        board.addStillEntity(grass);
-                        board.setTile(j, i, grass);
                         PowerupFlames powerupFlames = new PowerupFlames(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, this.board);
-                        board.addStillEntity(powerupFlames);
+                        layeredEntity = new LayeredEntity(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, grass, powerupFlames);
+                        powerupFlames.setLayeredEntity(layeredEntity);
+                        board.addStillEntity(layeredEntity);
+                        board.setTile(j, i, layeredEntity);
                         break;
                     case 's':
                         grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
-                        board.addStillEntity(grass);
-                        board.setTile(j, i, grass);
                         PowerupSpeed powerupSpeed = new PowerupSpeed(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, this.board);
-                        board.addStillEntity(powerupSpeed);
+                        layeredEntity = new LayeredEntity(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, grass, powerupSpeed);
+                        powerupSpeed.setLayeredEntity(layeredEntity);
+                        board.addStillEntity(layeredEntity);
+                        board.setTile(j, i, layeredEntity);
                         break;
                     default:
                         grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);

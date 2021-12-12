@@ -1,23 +1,24 @@
 package entities.tiles.powerup;
 
+import entities.LayeredEntity;
 import entities.tiles.Tile;
 import level.Board;
 
-import java.awt.*;
-
-public class Powerup extends Tile {
+public abstract class Powerup extends Tile {
+    protected LayeredEntity layeredEntity;
     protected Board board;
-    
+
     public Powerup(int x, int y, Board board) {
         super(x, y);
         this.board = board;
     }
 
-    public void update() {
-
+    public LayeredEntity getLayeredEntity() {
+        return layeredEntity;
     }
 
-    public void draw(Graphics2D g2) {
-
+    public void setLayeredEntity(LayeredEntity layeredEntity) {
+        this.layeredEntity = layeredEntity;
     }
+
 }

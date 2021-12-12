@@ -14,9 +14,8 @@ public class PowerupFlames extends Powerup {
     }
 
     public void update() {
-        if (this.bounds.intersects(this.board.getBomber().getBounds())) {
-            this.board.removeStillEntity(this);
-            //do sth
+        if (layeredEntity.getTopEntity() == this && this.bounds.intersects(this.board.getBomber().getBounds())) {
+            this.isRemoved = true;
             GamePanel.setBombRadius(2);
         }
     }
