@@ -12,7 +12,6 @@ import java.awt.*;
 
 public class Bomber extends Characters {
     private final Keyboard keyboard;
-    private int lives = 3;
 
     private int timeBetweenBombsLeft = 0;
 
@@ -103,22 +102,6 @@ public class Bomber extends Characters {
                     return ((Bomb) that).intersectWithBomber;
                 }
             }
-
-        }
-        return true;
-    }
-
-    public boolean canMovePassMovingEntities() {
-        for (int i = 0; i < board.movingEntities.size(); i++) {
-            Entity that = board.movingEntities.get(i);
-            if (this.getClass() != that.getClass() && this.getBounds().intersects(that.getBounds())) {
-                if (!that.getClass().equals(Bomb.class)) {  // collide with enemies
-                    kill();
-                    return false;
-                } else {                                    // collide with bomb
-                    return ((Bomb) that).intersectWithBomber;
-                }
-            }
         }
         return true;
     }
@@ -159,9 +142,10 @@ public class Bomber extends Characters {
 
     @Override
     public void kill() {
-        if (lives > 1) {
-            lives--;
-        } else
+//        System.out.println("lives: " + GamePanel.getLives());
+        GamePanel.decreaseLives();
+//        System.out.println(GamePanel.getLives() + " left");
+        if (GamePanel.getLives() == 0)
             super.kill();
     }
 
