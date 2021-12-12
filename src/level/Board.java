@@ -3,7 +3,6 @@ package level;
 import control.Keyboard;
 import entities.Entity;
 import entities.animatedEntities.characters.Bomber;
-import entities.tiles.Tile;
 import gui.GamePanel;
 import gui.InfoPanel;
 
@@ -17,7 +16,7 @@ public class Board {
     private Bomber bomber;
 
     private LevelLoader levelLoader = new LevelLoader(this);
-    private Tile[][] tiles;
+    private Entity[][] tiles;
 
     public List<Entity> movingEntities = new ArrayList<>();
     public List<Entity> stillEntities = new ArrayList<>();
@@ -26,9 +25,8 @@ public class Board {
         this.gamePanel = gamePanel;
         keyboard = gamePanel.getKeyboard();
         levelLoader.loadFile();
-        tiles = new Tile[levelLoader.getHeight()][levelLoader.getWidth()];
+        tiles = new Entity[levelLoader.getHeight()][levelLoader.getWidth()];
         levelLoader.createLevel();
-
     }
 
     public void update() {
@@ -74,11 +72,11 @@ public class Board {
         return keyboard;
     }
 
-    public void setTile(int row, int col, Tile tile) {
+    public void setTile(int row, int col, Entity tile) {
         tiles[col][row] = tile;
     }
 
-    public Tile getTile(int col, int row) {
+    public Entity getTile(int col, int row) {
         return tiles[row][col];
     }
 
