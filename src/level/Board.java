@@ -2,7 +2,6 @@ package level;
 
 import control.Keyboard;
 import entities.Entity;
-import entities.animatedEntities.bomb.Bomb;
 import entities.animatedEntities.characters.Bomber;
 import gui.GamePanel;
 import gui.InfoPanel;
@@ -17,15 +16,18 @@ public class Board {
     private Bomber bomber;
     private int level;
 
-    private LevelLoader levelLoader = new LevelLoader(this);
+    private LevelLoader levelLoader;
     private Entity[][] tiles;
 
-    public List<Entity> movingEntities = new ArrayList<>();
-    public List<Entity> stillEntities = new ArrayList<>();
+    public List<Entity> movingEntities;
+    public List<Entity> stillEntities;
 
     public Board(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         this.level = gamePanel.getLevel();
+        levelLoader = new LevelLoader(this);
+        movingEntities = new ArrayList<>();
+        stillEntities = new ArrayList<>();
         keyboard = gamePanel.getKeyboard();
         levelLoader.loadFile();
         tiles = new Entity[levelLoader.getHeight()][levelLoader.getWidth()];
