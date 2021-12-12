@@ -86,4 +86,15 @@ public abstract class Characters extends AnimatedEntity {
                 remove();
         }
     }
+
+
+    protected boolean enemyCollision() {
+        for (int i = 0; i < board.movingEntities.size(); i++) {
+            if (!board.movingEntities.get(i).equals(this) && board.movingEntities.get(i).getBounds().intersects(this.bounds)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

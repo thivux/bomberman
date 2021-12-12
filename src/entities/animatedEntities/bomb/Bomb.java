@@ -10,7 +10,7 @@ import java.awt.*;
 
 public class Bomb extends AnimatedEntity {
     Board board;
-    private int timeToExplode = 120;
+    public int timeToExplode = 120;
     private boolean exploded = false;
     private int afterExplosion = 20;
     private DirectionalFlame[] DirectionalFlames;
@@ -36,8 +36,9 @@ public class Bomb extends AnimatedEntity {
             timeToExplode--;
         } else {    // time out
             if (!exploded) {
-                displayExplosion();
-                exploded = true;
+
+                explode();
+
             } else {
                 if (afterExplosion > 0) {
                     afterExplosion--;
@@ -51,7 +52,13 @@ public class Bomb extends AnimatedEntity {
         animate();
     }
 
-    public void collide() {
+    public void explode() {
+        exploded = true;
+        displayExplosion();
+    }
+
+    public void collideWithCharacter() {
+
         for (int i = 0; i < board.movingEntities.size(); i++) {
             Entity that = board.movingEntities.get(i);
             if (!that.getClass().equals(Bomb.class) && this.getBounds().intersects(that.getBounds())) {
@@ -69,7 +76,9 @@ public class Bomb extends AnimatedEntity {
             DirectionalFlames[i] = new DirectionalFlame(x, y, i, GamePanel.getBombRadius(), board);
         }
 
-        collide();
+
+        collideWithCharacter();
+
 
         for (int i = 0; i < 4; i++) {
             DirectionalFlames[i].update();
@@ -95,6 +104,5 @@ public class Bomb extends AnimatedEntity {
 
     @Override
     public void kill() {
-        exploded = true;
     }
 }

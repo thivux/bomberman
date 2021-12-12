@@ -14,6 +14,9 @@ public class Bomber extends Characters {
     private final Keyboard keyboard;
     private int lives = 3;
 
+    private int timeBetweenBombsLeft = 0;
+
+
     public Bomber(int x, int y, Board board) {
         super(x, y, board);
         this.keyboard = board.getKeyboard();
@@ -25,6 +28,11 @@ public class Bomber extends Characters {
 
     @Override
     public void update() {
+
+        if (timeBetweenBombsLeft > 0) {
+            timeBetweenBombsLeft--;
+        }
+
         if (!alive) {
             afterKill();
         }
@@ -72,11 +80,32 @@ public class Bomber extends Characters {
         }
 
         if (keyboard.spacePressed) {
-            int xt = ((x + sprite.getSize() / 2) / GamePanel.TILE_SIZE) * GamePanel.TILE_SIZE;
-            int yt = ((y + sprite.getSize() / 2) / GamePanel.TILE_SIZE) * GamePanel.TILE_SIZE; //subtract half player height and minus 1 y position
-            Bomb bomb = new Bomb(xt, yt, board);
-            board.addMovingEntity(bomb);
+            if (timeBetweenBombsLeft > 0) {
+//                System.out.println("wait ik");
+            } else {
+                timeBetweenBombsLeft = GamePanel.timeBetweenBombs;
+                int xt = ((x + sprite.getSize() / 2) / GamePanel.TILE_SIZE) * GamePanel.TILE_SIZE;
+                int yt = ((y + sprite.getSize() / 2) / GamePanel.TILE_SIZE) * GamePanel.TILE_SIZE; //subtract half player height and minus 1 y position
+                Bomb bomb = new Bomb(xt, yt, board);
+                board.addMovingEntity(bomb);
+            }
         }
+    }
+
+    public boolean canMovePassMovingEntities() {
+        for (int i = 0; i < board.movingEntities.size(); i++) {
+            Entity that = board.movingEntities.get(i);
+            if (this.getClass() != that.getClass() && this.getBounds().intersects(that.getBounds())) {
+                if (!that.getClass().equals(Bomb.class)) {  // collide with enemies
+                    kill();
+                    return false;
+                } else {                                    // collide with bomb
+                    return ((Bomb) that).intersectWithBomber;
+                }
+            }
+
+        }
+        return true;
     }
 
     public boolean canMovePassMovingEntities() {
@@ -136,7 +165,9 @@ public class Bomber extends Characters {
             super.kill();
     }
 
+
     public void setSpeed(int i) {
         speed = i;
     }
+
 }

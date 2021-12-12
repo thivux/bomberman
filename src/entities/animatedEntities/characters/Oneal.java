@@ -29,19 +29,31 @@ public class Oneal extends Characters {
             if (board.getBomber().getX() > this.x) {
                 if (canMovePassTile("right")) {
                     move("right");
+                    if (enemyCollision()) {
+                        move("left");
+                    }
                 }
             } else if (board.getBomber().getX() < this.x) {
                 if (canMovePassTile("left")) {
                     move("left");
+                    if (enemyCollision()) {
+                        move("right");
+                    }
                 }
             }
             if (board.getBomber().getY() > this.y) {
                 if (canMovePassTile("down")) {
                     move("down");
+                    if (enemyCollision()) {
+                        move("up");
+                    }
                 }
             } else if (board.getBomber().getY() < this.y) {
                 if (canMovePassTile("up")) {
                     move("up");
+                    if (enemyCollision()) {
+                        move("down");
+                    }
                 }
             }
         } else {
@@ -83,21 +95,33 @@ public class Oneal extends Characters {
                     case "up":
                         if (canMovePassTile("up")) {
                             move("up");
+                            if (enemyCollision()) {
+                                move("down");
+                            }
                         }
                         break;
                     case "down":
                         if (canMovePassTile("down")) {
                             move("down");
+                            if (enemyCollision()) {
+                                move("up");
+                            }
                         }
                         break;
                     case "left":
                         if (canMovePassTile("left")) {
                             move("left");
+                            if (enemyCollision()) {
+                                move("right");
+                            }
                         }
                         break;
                     case "right":
                         if (canMovePassTile("right")) {
                             move("right");
+                            if (enemyCollision()) {
+                                move("left");
+                            }
                         }
                         break;
                     default:
