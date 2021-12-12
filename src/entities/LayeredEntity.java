@@ -27,7 +27,7 @@ public class LayeredEntity extends Entity {
     @Override
     public void draw(Graphics2D g2) {
         for (Entity entity : entities) {
-            g2.drawImage(entity.sprite.getImage(), x, y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
+            entity.draw(g2);
         }
     }
 

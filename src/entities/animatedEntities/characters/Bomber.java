@@ -84,7 +84,7 @@ public class Bomber extends Characters {
             } else {
                 timeBetweenBombsLeft = GamePanel.timeBetweenBombs;
                 int xt = ((x + sprite.getSize() / 2) / GamePanel.TILE_SIZE) * GamePanel.TILE_SIZE;
-                int yt = ((y + sprite.getSize() / 2) / GamePanel.TILE_SIZE) * GamePanel.TILE_SIZE; //subtract half player height and minus 1 y position
+                int yt = ((y + sprite.getSize() / 2) / GamePanel.TILE_SIZE) * GamePanel.TILE_SIZE;
                 Bomb bomb = new Bomb(xt, yt, board);
                 board.addMovingEntity(bomb);
             }
