@@ -1,8 +1,6 @@
 package entities;
 
 
-import gui.GamePanel;
-
 import java.awt.*;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -21,6 +19,8 @@ public class LayeredEntity extends Entity {
     @Override
     public void update() {
         clearRemoved();
+        id = getTopEntity().id;
+        collision = getTopEntity().collision;
         getTopEntity().update();
     }
 
@@ -41,5 +41,6 @@ public class LayeredEntity extends Entity {
         if (top.isRemoved()) {
             entities.removeLast();
         }
+
     }
 }

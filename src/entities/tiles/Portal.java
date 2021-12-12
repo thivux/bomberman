@@ -3,19 +3,30 @@ package entities.tiles;
 import entities.ID;
 import graphics.Sprite;
 import gui.GamePanel;
+import level.Board;
 
 import java.awt.*;
 
 public class Portal extends Tile {
-    public Portal(int x, int y) {
+    private Board board;
+
+    public Portal(int x, int y, Board board) {
         super(x, y);
         id = ID.Portal;
         sprite = Sprite.portal;
         collision = true;
+        this.board = board;
     }
 
     public void update() {
-
+        if (board.movingEntities.size() == 1) {
+            collision = false;
+            if (bounds.intersects(this.board.getBomber().getBounds())) {
+                System.out.println("win");
+                // TODO: win!
+                board.nextLevel();
+            }
+        }
     }
 
     public void draw(Graphics2D g2) {

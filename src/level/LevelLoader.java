@@ -30,7 +30,7 @@ public class LevelLoader {
 
     public void loadFile() {
         try {
-            BufferedReader br = new BufferedReader(new FileReader("res\\levels\\TestLevel1.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("res\\levels\\Level" + this.board.getLevel() + ".txt"));
             String[] option = br.readLine().split(" ");
             level = Integer.parseInt(option[0]);
             height = Integer.parseInt(option[1]);
@@ -67,9 +67,9 @@ public class LevelLoader {
                         break;
                     case 'x':
                         grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
-                        Portal portal = new Portal(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
-                        //board.addStillEntity(new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i));
-                        layeredEntity = new LayeredEntity(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, grass, portal);
+                        Portal portal = new Portal(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, this.board);
+                        brick = new Brick(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
+                        layeredEntity = new LayeredEntity(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, grass, portal, brick);
                         board.addStillEntity(layeredEntity);
                         board.setTile(j, i, layeredEntity);
                         break;
@@ -96,7 +96,8 @@ public class LevelLoader {
                     case 'b':
                         grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
                         PowerupBombs powerupBombs = new PowerupBombs(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, this.board);
-                        layeredEntity = new LayeredEntity(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, grass, powerupBombs);
+                        brick = new Brick(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
+                        layeredEntity = new LayeredEntity(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, grass, powerupBombs, brick);
                         powerupBombs.setLayeredEntity(layeredEntity);
                         board.addStillEntity(layeredEntity);
                         board.setTile(j, i, layeredEntity);
@@ -104,7 +105,8 @@ public class LevelLoader {
                     case 'f':
                         grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
                         PowerupFlames powerupFlames = new PowerupFlames(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, this.board);
-                        layeredEntity = new LayeredEntity(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, grass, powerupFlames);
+                        brick = new Brick(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
+                        layeredEntity = new LayeredEntity(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, grass, powerupFlames, brick);
                         powerupFlames.setLayeredEntity(layeredEntity);
                         board.addStillEntity(layeredEntity);
                         board.setTile(j, i, layeredEntity);
@@ -112,7 +114,8 @@ public class LevelLoader {
                     case 's':
                         grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
                         PowerupSpeed powerupSpeed = new PowerupSpeed(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, this.board);
-                        layeredEntity = new LayeredEntity(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, grass, powerupSpeed);
+                        brick = new Brick(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
+                        layeredEntity = new LayeredEntity(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, grass, powerupSpeed, brick);
                         powerupSpeed.setLayeredEntity(layeredEntity);
                         board.addStillEntity(layeredEntity);
                         board.setTile(j, i, layeredEntity);
