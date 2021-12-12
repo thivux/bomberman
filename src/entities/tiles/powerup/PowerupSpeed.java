@@ -17,6 +17,7 @@ public class PowerupSpeed extends Powerup {
         if (layeredEntity.getTopEntity() == this && this.bounds.intersects(this.board.getBomber().getBounds())) {
             this.isRemoved = true;
             this.board.getBomber().setSpeed(3);
+            GamePanel.playSE(4);
         }
     }
 

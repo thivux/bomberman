@@ -17,6 +17,7 @@ public class PowerupBombs extends Powerup {
         if (layeredEntity.getTopEntity() == this && this.bounds.intersects(this.board.getBomber().getBounds())) {
             this.isRemoved = true;
             GamePanel.addBombRate();
+            GamePanel.playSE(4);
             System.out.println(GamePanel.getBombRate());
         }
     }

@@ -55,6 +55,7 @@ public class Bomb extends AnimatedEntity {
 
     public void explode() {
         exploded = true;
+        GamePanel.playSE(2);
         displayExplosion();
     }
 
