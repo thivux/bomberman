@@ -44,6 +44,7 @@ public class Bomb extends AnimatedEntity {
                     afterExplosion--;
                 } else {
                     remove();
+                    board.getBomber().bombRemoved();
 //                    board.setTile(x / GamePanel.TILE_SIZE, y / GamePanel.TILE_SIZE, new Grass(x, y));
                 }
             }
