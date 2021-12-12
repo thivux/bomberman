@@ -1,8 +1,8 @@
 package entities.animatedEntities.bomb;
 
 import entities.Entity;
+import entities.ID;
 import entities.LayeredEntity;
-import entities.tiles.Brick;
 import gui.GamePanel;
 import level.Board;
 
@@ -81,7 +81,7 @@ public class DirectionalFlame extends Entity {
             }
 
             if (board.getTile(xTile, yTile).collision) {
-                if (board.getTile(xTile, yTile) instanceof LayeredEntity) {
+                if (board.getTile(xTile, yTile) instanceof LayeredEntity && board.getTile(xTile, yTile).getId() == ID.Brick) {
                     ((LayeredEntity) board.getTile(xTile, yTile)).getTopEntity().remove();
                 }
                 break;

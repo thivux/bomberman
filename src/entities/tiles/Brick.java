@@ -20,7 +20,7 @@ public class Brick extends Tile {
 
     public void update() {
         if (exploded) {
-            System.out.println("here");
+            //System.out.println("here");
             if (afterExplosion > 0) {
                 afterExplosion--;
             } else {
@@ -34,7 +34,7 @@ public class Brick extends Tile {
         if (!exploded) {
             sprite = Sprite.brick;
         } else {
-                sprite = Sprite.movingSprite(Sprite.brick_exploded, Sprite.brick_exploded1, Sprite.brick_exploded2, _animate, 30);
+            sprite = Sprite.movingSprite(Sprite.brick_exploded, Sprite.brick_exploded1, Sprite.brick_exploded2, _animate, 30);
         }
         g2.drawImage(sprite.getImage(), x, y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
     }
