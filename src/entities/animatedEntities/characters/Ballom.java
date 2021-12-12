@@ -122,4 +122,9 @@ public class Ballom extends Characters {
         }
         g2.drawImage(sprite.getImage(), x, y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
     }
+//
+//    @Override
+//    public void kill() {
+//
+//    }
 }

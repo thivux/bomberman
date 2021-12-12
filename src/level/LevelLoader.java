@@ -7,6 +7,9 @@ import entities.tiles.Brick;
 import entities.tiles.Grass;
 import entities.tiles.Portal;
 import entities.tiles.Wall;
+import entities.tiles.powerup.PowerupBombs;
+import entities.tiles.powerup.PowerupFlames;
+import entities.tiles.powerup.PowerupSpeed;
 import gui.GamePanel;
 
 import java.io.BufferedReader;
@@ -39,6 +42,7 @@ public class LevelLoader {
                     map[i][j] = line.charAt(j);
                 }
             }
+            br.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -84,20 +88,26 @@ public class LevelLoader {
                         board.setTile(j, i, grass);
                         board.addMovingEntity(new Oneal(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, board));
                         break;
-                    case 'b': //TODO: bomb item
+                    case 'b':
                         grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
                         board.addStillEntity(grass);
                         board.setTile(j, i, grass);
+                        PowerupBombs powerupBombs = new PowerupBombs(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, this.board);
+                        board.addStillEntity(powerupBombs);
                         break;
-                    case 'f': //TODO: fire item
+                    case 'f':
                         grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
                         board.addStillEntity(grass);
                         board.setTile(j, i, grass);
+                        PowerupFlames powerupFlames = new PowerupFlames(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, this.board);
+                        board.addStillEntity(powerupFlames);
                         break;
-                    case 's': //TODO: speed item
+                    case 's':
                         grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
                         board.addStillEntity(grass);
                         board.setTile(j, i, grass);
+                        PowerupSpeed powerupSpeed = new PowerupSpeed(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, this.board);
+                        board.addStillEntity(powerupSpeed);
                         break;
                     default:
                         grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);

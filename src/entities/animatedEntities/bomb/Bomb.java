@@ -36,12 +36,15 @@ public class Bomb extends AnimatedEntity {
             timeToExplode--;
         } else {    // time out
             if (!exploded) {
+
                 explode();
+
             } else {
                 if (afterExplosion > 0) {
                     afterExplosion--;
                 } else {
                     remove();
+//                    board.setTile(x / GamePanel.TILE_SIZE, y / GamePanel.TILE_SIZE, new Grass(x, y));
                 }
             }
         }
@@ -55,6 +58,7 @@ public class Bomb extends AnimatedEntity {
     }
 
     public void collideWithCharacter() {
+
         for (int i = 0; i < board.movingEntities.size(); i++) {
             Entity that = board.movingEntities.get(i);
             if (!that.getClass().equals(Bomb.class) && this.getBounds().intersects(that.getBounds())) {
@@ -72,7 +76,9 @@ public class Bomb extends AnimatedEntity {
             DirectionalFlames[i] = new DirectionalFlame(x, y, i, GamePanel.getBombRadius(), board);
         }
 
+
         collideWithCharacter();
+
 
         for (int i = 0; i < 4; i++) {
             DirectionalFlames[i].update();

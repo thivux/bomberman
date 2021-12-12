@@ -87,6 +87,7 @@ public abstract class Characters extends AnimatedEntity {
         }
     }
 
+
     protected boolean enemyCollision() {
         for (int i = 0; i < board.movingEntities.size(); i++) {
             if (!board.movingEntities.get(i).equals(this) && board.movingEntities.get(i).getBounds().intersects(this.bounds)) {
@@ -95,4 +96,5 @@ public abstract class Characters extends AnimatedEntity {
         }
         return false;
     }
+
 }

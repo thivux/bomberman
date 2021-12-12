@@ -2,9 +2,6 @@ package level;
 
 import control.Keyboard;
 import entities.Entity;
-
-import entities.ID;
-import entities.animatedEntities.bomb.Bomb;
 import entities.animatedEntities.characters.Bomber;
 import entities.tiles.Tile;
 import gui.GamePanel;
@@ -41,6 +38,10 @@ public class Board {
     }
 
     public void update() {
+        for (int i = 0; i < stillEntities.size(); i++) {
+            stillEntities.get(i).update();
+        }
+
         for (int i = 0; i < movingEntities.size(); i++) {
             movingEntities.get(i).update();
         }
@@ -58,6 +59,10 @@ public class Board {
 
     public void addStillEntity(Entity entity) {
         stillEntities.add(entity);
+    }
+
+    public void removeStillEntity(Entity entity) {
+        stillEntities.remove(entity);
     }
 
     public void addMovingEntity(Entity entity) {
