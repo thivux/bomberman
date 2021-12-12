@@ -14,6 +14,7 @@ public class Bomber extends Characters {
     private final Keyboard keyboard;
     private int numberOfBombs = 0;
     private int timeBetweenBombs = 0; // no bomb when start
+    private int timeBetweenDeath = 0;
 
     public Bomber(int x, int y, Board board) {
         super(x, y, board);
@@ -140,13 +141,29 @@ public class Bomber extends Characters {
 
     @Override
     public void kill() {
+        if (timeBetweenDeath > 0) return;
+        super.kill();
 //        System.out.println("lives: " + GamePanel.getLives());
         GamePanel.decreaseLives();
 //        System.out.println(GamePanel.getLives() + " left");
-        if (GamePanel.getLives() == 0)
-            super.kill();
+//        if (GamePanel.getLives() == 0)
+        timeBetweenDeath = 120;
     }
 
+    public void afterKill() {
+        if (afterKill > 0) {
+            afterKill--;
+        } else {
+            if (finalAnimation > 0)
+                finalAnimation--;
+            else {
+                remove();
+                if (GamePanel.getLives() > 0) {
+                    board.restartLevel();
+                }
+            }
+        }
+    }
 
     public void setSpeed(int i) {
         speed = i;

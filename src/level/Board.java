@@ -2,6 +2,7 @@ package level;
 
 import control.Keyboard;
 import entities.Entity;
+import entities.animatedEntities.bomb.Bomb;
 import entities.animatedEntities.characters.Bomber;
 import gui.GamePanel;
 import gui.InfoPanel;
@@ -102,5 +103,10 @@ public class Board {
 
     public int getLevel() {
         return level;
+    }
+
+    public void restartLevel() {
+        Bomber bomber = new Bomber(GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, this);
+        addMovingEntity(bomber);
     }
 }
