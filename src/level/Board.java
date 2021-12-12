@@ -14,6 +14,7 @@ public class Board {
     private GamePanel gamePanel;
     private Keyboard keyboard;
     private Bomber bomber;
+    private int level;
 
     private LevelLoader levelLoader = new LevelLoader(this);
     private Entity[][] tiles;
@@ -23,6 +24,7 @@ public class Board {
 
     public Board(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
+        this.level = gamePanel.getLevel();
         keyboard = gamePanel.getKeyboard();
         levelLoader.loadFile();
         tiles = new Entity[levelLoader.getHeight()][levelLoader.getWidth()];
@@ -50,6 +52,16 @@ public class Board {
         for (int i = 0; i < movingEntities.size(); i++) {
             movingEntities.get(i).draw(g2);
         }
+    }
+
+    public void nextLevel() {
+        gamePanel.nextLevel();
+        level++;
+        movingEntities = new ArrayList<>();
+        stillEntities = new ArrayList<>();
+        levelLoader.loadFile();
+        tiles = new Entity[levelLoader.getHeight()][levelLoader.getWidth()];
+        levelLoader.createLevel();
     }
 
     public void addStillEntity(Entity entity) {
@@ -86,5 +98,9 @@ public class Board {
 
     public void setBomber(Bomber bomber) {
         this.bomber = bomber;
+    }
+
+    public int getLevel() {
+        return level;
     }
 }

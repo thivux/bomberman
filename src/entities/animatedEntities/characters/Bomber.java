@@ -84,7 +84,7 @@ public class Bomber extends Characters {
                 Bomb bomb = new Bomb(xt, yt, board);
                 board.addMovingEntity(bomb);
                 numberOfBombs++;
-                System.out.println("added");
+//                System.out.println("added");
             }
         }
     }
