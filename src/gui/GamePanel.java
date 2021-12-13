@@ -52,6 +52,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int playState = 1;
     public final int pauseState = 2;
     public final int endState = 3;
+    public final int howToPlayState = 4;
     public int commandNum = 0;
 
     public GamePanel() {
@@ -136,6 +137,9 @@ public class GamePanel extends JPanel implements Runnable {
             drawTitleScreen(g2);
         } else if (gameState == endState) {
             drawEndScreen(g2);
+        } else if (gameState == howToPlayState) {
+            drawTitleScreen(g2);
+            drawHowToPlayScreen(g2);
         } else {
             g2.translate(-camera.getX(), -camera.getY());
             board.draw(g2);
@@ -145,6 +149,33 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
         g2.dispose();
+    }
+
+    private void drawHowToPlayScreen(Graphics2D g2) {
+        int x = TILE_SIZE * 2;
+        int y = TILE_SIZE * 2;
+        int width = SCREEN_WIDTH - TILE_SIZE * 4;
+        int height = TILE_SIZE * 5;
+
+        Color c = new Color(0, 0, 0, 210);
+        g2.setColor(c);
+        g2.fillRoundRect(x, y, width, height, 35, 35);
+
+        c = new Color(255, 255, 255);
+        g2.setColor(c);
+        g2.setStroke(new BasicStroke(5));
+        g2.drawRoundRect(x + 5, y + 5, width - 10, height - 10, 25, 25);
+
+        x += TILE_SIZE;
+        y += TILE_SIZE;
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
+        String text = "wasd to move\n" +
+                "space to place bomb\n" +
+                "p to pause\n";
+        for (String line : text.split("\n")) {
+            g2.drawString(line, x, y);
+            y += 40;
+        }
     }
 
     private void drawEndScreen(Graphics2D g2) {
@@ -210,7 +241,7 @@ public class GamePanel extends JPanel implements Runnable {
             g2.drawString(">", x - TILE_SIZE, y);
         }
 
-        text = "LOAD GAME";
+        text = "HOW TO PLAY";
         length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         x = SCREEN_WIDTH / 2 - length / 2;
         y = TILE_SIZE * 7;
@@ -255,6 +286,10 @@ public class GamePanel extends JPanel implements Runnable {
 
     public static void setBombRadius(int bombRadius) {
         GamePanel.bombRadius = bombRadius;
+    }
+
+    public static void addBombRadius() {
+        bombRadius++;
     }
 
     public static double getSpeed() {
