@@ -1,9 +1,7 @@
 package level;
 
 import entities.LayeredEntity;
-import entities.animatedEntities.characters.Ballom;
-import entities.animatedEntities.characters.Bomber;
-import entities.animatedEntities.characters.Oneal;
+import entities.animatedEntities.characters.*;
 import entities.tiles.Brick;
 import entities.tiles.Grass;
 import entities.tiles.Portal;
@@ -92,6 +90,18 @@ public class LevelLoader {
                         board.addStillEntity(grass);
                         board.setTile(j, i, grass);
                         board.addMovingEntity(new Oneal(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, board));
+                        break;
+                    case '3':
+                        grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
+                        board.addStillEntity(grass);
+                        board.setTile(j, i, grass);
+                        board.addMovingEntity(new Doll(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, board));
+                        break;
+                    case '4':
+                        grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
+                        board.addStillEntity(grass);
+                        board.setTile(j, i, grass);
+                        board.addMovingEntity(new Minvo(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i, board));
                         break;
                     case 'b':
                         grass = new Grass(GamePanel.TILE_SIZE * j, GamePanel.TILE_SIZE * i);
