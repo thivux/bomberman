@@ -37,12 +37,16 @@ public class Keyboard implements KeyListener {
             }
             if (code == KeyEvent.VK_ENTER) {
                 if (gamePanel.commandNum == 0) {
-                    gamePanel.gameState = 1;
+                    gamePanel.gameState = gamePanel.playState;
                 } else if (gamePanel.commandNum == 1) {
-                    //TODO: load game
+                    gamePanel.gameState = gamePanel.howToPlayState;
                 } else if (gamePanel.commandNum == 2) {
                     System.exit(0);
                 }
+            }
+        } else if (gamePanel.gameState == gamePanel.howToPlayState) {
+            if (code == KeyEvent.VK_ENTER) {
+                gamePanel.gameState = gamePanel.titleState;
             }
         } else if (gamePanel.gameState == gamePanel.endState) {
             if (code == KeyEvent.VK_W) {
@@ -59,7 +63,7 @@ public class Keyboard implements KeyListener {
             }
             if (code == KeyEvent.VK_ENTER) {
                 if (gamePanel.commandNum == 0) {
-                    gamePanel.gameState = 1;
+                    gamePanel.gameState = gamePanel.playState;
                     gamePanel.resetGame();
                 } else if (gamePanel.commandNum == 1) {
                     System.exit(0);

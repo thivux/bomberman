@@ -69,7 +69,8 @@ public class Bomber extends Characters {
                 } else {
                     GamePanel.playSE(5);
                     timeToPlaySEDown = timeToPlaySE;
-                }            }
+                }
+            }
         }
         if (keyboard.leftPressed) {
             direction = "left";
@@ -203,5 +204,9 @@ public class Bomber extends Characters {
     public void bombRemoved() {
         numberOfBombs--;
 //        System.out.println("bomb removed");
+    }
+
+    public void addSpeed() {
+        speed++;
     }
 }
