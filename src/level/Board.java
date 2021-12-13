@@ -108,8 +108,9 @@ public class Board {
     }
 
     public void restartLevel() {
-        Bomber bomber = new Bomber(GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, this);
+        bomber = new Bomber(GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, this);
         addMovingEntity(bomber);
+        setBomber(bomber);
         GamePanel.playSE(3);
     }
 }

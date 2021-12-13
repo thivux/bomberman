@@ -61,6 +61,7 @@ public class Bomber extends Characters {
             if (canMovePassTile("down")) {
                 move("down");
                 if (!canMovePassMovingEntities()) {
+
                     move("up");
                 }
                 if (timeToPlaySEDown > 0) {
@@ -75,6 +76,7 @@ public class Bomber extends Characters {
             if (canMovePassTile("left")) {
                 move("left");
                 if (!canMovePassMovingEntities()) {
+
                     move("right");
                 }
                 if (timeToPlaySELeft > 0) {
@@ -127,6 +129,7 @@ public class Bomber extends Characters {
                     kill();
                     return false;
                 } else {                                    // collide with bomb
+//                    System.out.println("bomb problem");
                     return ((Bomb) that).intersectWithBomber;
                 }
             }
@@ -199,5 +202,6 @@ public class Bomber extends Characters {
 
     public void bombRemoved() {
         numberOfBombs--;
+//        System.out.println("bomb removed");
     }
 }

@@ -14,14 +14,14 @@ public class Bomb extends AnimatedEntity {
     private boolean exploded = false;
     private int afterExplosion = 20;
     private DirectionalFlame[] DirectionalFlames;
-    public boolean intersectWithBomber = true;
+    public boolean intersectWithBomber;
 
     public Bomb(int x, int y, Board board) {
         super(x, y);
         this.sprite = Sprite.bomb;
         this.board = board;
         collision = true;
-//        bounds = new Rectangle(x, y, GamePanel.TILE_SIZE + 2, GamePanel.TILE_SIZE + 2);
+        intersectWithBomber = true;
     }
 
     @Override
