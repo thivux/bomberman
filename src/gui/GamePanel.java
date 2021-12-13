@@ -39,12 +39,20 @@ public class GamePanel extends JPanel implements Runnable {
     //FPS
     public final static int FPS = 60;
 
-    private Keyboard keyboard = new Keyboard();
+    private Keyboard keyboard = new Keyboard(this);
     private Thread thread;
     private Board board = new Board(this);
     private Camera camera = new Camera(0, 0);
 
     private static Sound sound = new Sound();
+
+    //GAME STATE
+    public int gameState;
+    public final int titleState = 0;
+    public final int playState = 1;
+    public final int pauseState = 2;
+    public final int endState = 3;
+    public int commandNum = 0;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
@@ -53,6 +61,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.addKeyListener(keyboard);
         setFocusable(true);
         playMusic(0);
+        gameState = titleState;
     }
 
     public void start() {
@@ -93,32 +102,143 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-
-        for (int i = 0; i < board.movingEntities.size(); i++) {
-            Entity entity = board.movingEntities.get(i);
-            if (entity.getId() == ID.Bomber) {   // camera move according to bomber pos
-                camera.update(entity);
-            }
-            if (entity.isRemoved()) {
-                board.removeMovingEntity(entity);
-                if (!(entity instanceof Bomber) && !(entity instanceof Bomb)) {
-                    increaseScore();
+        if (lives == 0) {
+            gameState = endState;
+        }
+        if (gameState == playState) {
+            for (int i = 0; i < board.movingEntities.size(); i++) {
+                Entity entity = board.movingEntities.get(i);
+                if (entity.getId() == ID.Bomber) {   // camera move according to bomber pos
+                    camera.update(entity);
+                }
+                if (entity.isRemoved()) {
+                    board.removeMovingEntity(entity);
+                    if (!(entity instanceof Bomber) && !(entity instanceof Bomb)) {
+                        increaseScore();
+                    }
                 }
             }
+            board.update();
+        } else if (gameState == pauseState) {
+            //nothing
         }
-        board.update();
 
+//        System.out.println(gameState);
     }
+
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
 
-        g2.translate(-camera.getX(), -camera.getY());
-        board.draw(g2);
+        if (gameState == titleState) {
+            drawTitleScreen(g2);
+        } else if (gameState == endState) {
+            drawEndScreen(g2);
+        } else {
+            g2.translate(-camera.getX(), -camera.getY());
+            board.draw(g2);
 
+            if (gameState == pauseState) {
+                drawPauseScreen(g2);
+            }
+        }
         g2.dispose();
+    }
+
+    private void drawEndScreen(Graphics2D g2) {
+        g2.setColor(Color.black);
+        g2.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 90F));
+        String text = "You Died";
+
+        int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        int x = SCREEN_WIDTH / 2 - length / 2;
+        int y = TILE_SIZE * 4;
+
+        g2.setColor(Color.white);
+        g2.drawString(text, x, y);
+
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 45F));
+
+        text = "RETRY";
+        length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        x = SCREEN_WIDTH / 2 - length / 2;
+        y = TILE_SIZE * 6;
+        g2.drawString(text, x, y);
+        if (commandNum == 0) {
+            g2.drawString(">", x - TILE_SIZE, y);
+        }
+
+        text = "QUIT";
+        length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        x = SCREEN_WIDTH / 2 - length / 2;
+        y = TILE_SIZE * 8;
+        g2.drawString(text, x, y);
+        if (commandNum == 1) {
+            g2.drawString(">", x - TILE_SIZE, y);
+        }
+    }
+
+    private void drawTitleScreen(Graphics2D g2) {
+        g2.setColor(Color.black);
+        g2.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 90F));
+        String text = "Bomberman";
+
+        int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        int x = SCREEN_WIDTH / 2 - length / 2;
+        int y = TILE_SIZE * 4;
+
+        g2.setColor(Color.gray);
+        g2.drawString(text, x + 5, y + 5);
+
+        g2.setColor(Color.white);
+        g2.drawString(text, x, y);
+
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 45F));
+
+        text = "NEW GAME";
+        length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        x = SCREEN_WIDTH / 2 - length / 2;
+        y = TILE_SIZE * 6;
+        g2.drawString(text, x, y);
+        if (commandNum == 0) {
+            g2.drawString(">", x - TILE_SIZE, y);
+        }
+
+        text = "LOAD GAME";
+        length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        x = SCREEN_WIDTH / 2 - length / 2;
+        y = TILE_SIZE * 7;
+        g2.drawString(text, x, y);
+        if (commandNum == 1) {
+            g2.drawString(">", x - TILE_SIZE, y);
+        }
+
+        text = "QUIT";
+        length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        x = SCREEN_WIDTH / 2 - length / 2;
+        y = TILE_SIZE * 8;
+        g2.drawString(text, x, y);
+        if (commandNum == 2) {
+            g2.drawString(">", x - TILE_SIZE, y);
+        }
+
+    }
+
+    private void drawPauseScreen(Graphics2D g2) {
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80F));
+        String text = "PAUSED";
+
+        int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        int x = SCREEN_WIDTH / 2 - length / 2;
+        int y = SCREEN_HEIGHT / 2;
+
+        g2.drawString(text, x, y);
     }
 
     public Keyboard getKeyboard() {
@@ -186,5 +306,12 @@ public class GamePanel extends JPanel implements Runnable {
     public static void playSE(int idx) {
         sound.setFile(idx);
         sound.play();
+    }
+
+    public void resetGame() {
+        lives = 3;
+        score = 0;
+        board = new Board(this);
+        camera = new Camera(0, 0);
     }
 }
