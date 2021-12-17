@@ -266,8 +266,8 @@ public class GamePanel extends JPanel implements Runnable {
         String text = "PAUSED";
 
         int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-        int x = SCREEN_WIDTH / 2 - length / 2;
-        int y = SCREEN_HEIGHT / 2;
+        int x = (int) camera.getX() + SCREEN_WIDTH / 2 - length / 2;
+        int y = (int) camera.getY() + SCREEN_HEIGHT / 2;
 
         g2.drawString(text, x, y);
     }

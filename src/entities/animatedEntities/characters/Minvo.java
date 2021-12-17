@@ -6,7 +6,7 @@ import level.Board;
 
 import java.awt.*;
 
-public class Minvo extends Characters {
+public class Minvo extends Enemy {
     public static final int RANGE = 4;
 
     public Minvo(int x, int y, Board board) {
@@ -35,7 +35,7 @@ public class Minvo extends Characters {
             }
 
         } else {
-            if(afterKill > 0) {
+            if (afterKill > 0) {
                 sprite = Sprite.minvo_dead;
                 _animate = 0;
             } else { // final animation
