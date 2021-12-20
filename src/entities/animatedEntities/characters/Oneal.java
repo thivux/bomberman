@@ -1,14 +1,14 @@
 package entities.animatedEntities.characters;
 
+import entities.Entity;
 import entities.ID;
 import graphics.Sprite;
 import gui.GamePanel;
 import level.Board;
 
 import java.awt.*;
-import java.util.Random;
 
-public class Oneal extends Characters {
+public class Oneal extends Enemy {
 
     public Oneal(int x, int y, Board board) {
         super(x, y, board);

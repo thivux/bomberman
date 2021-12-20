@@ -6,7 +6,7 @@ import level.Board;
 
 import java.awt.*;
 
-public class Minvo extends Characters {
+public class Minvo extends Enemy {
 
     public Minvo(int x, int y, Board board) {
         super(x, y, board);
