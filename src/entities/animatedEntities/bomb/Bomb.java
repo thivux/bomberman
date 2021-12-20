@@ -9,7 +9,7 @@ import level.Board;
 import java.awt.*;
 
 public class Bomb extends AnimatedEntity {
-    Board board;
+    private Board board;
     public int timeToExplode = 120;
     private boolean exploded = false;
     private int afterExplosion = 20;

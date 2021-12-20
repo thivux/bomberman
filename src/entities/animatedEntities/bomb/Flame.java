@@ -9,8 +9,8 @@ import level.Board;
 import java.awt.*;
 
 public class Flame extends Entity {
-    String direction;
-    Board board;
+    private String direction;
+    private Board board;
 
     public Flame(int x, int y, String direction, boolean last, Board board) {
         super(x, y);

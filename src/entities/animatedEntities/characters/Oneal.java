@@ -9,7 +9,6 @@ import java.awt.*;
 import java.util.Random;
 
 public class Oneal extends Characters {
-    public static final int RANGE = 4;
 
     public Oneal(int x, int y, Board board) {
         super(x, y, board);

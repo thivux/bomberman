@@ -7,7 +7,6 @@ import level.Board;
 import java.awt.*;
 
 public class Minvo extends Characters {
-    public static final int RANGE = 4;
 
     public Minvo(int x, int y, Board board) {
         super(x, y, board);
