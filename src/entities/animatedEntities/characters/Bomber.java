@@ -168,7 +168,7 @@ public class Bomber extends Characters {
         g2.drawImage(sprite.getImage(), x, y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
 
         // erase comment to see hitbox
-        g2.draw(bounds);
+//        g2.draw(bounds);
 
     }
 

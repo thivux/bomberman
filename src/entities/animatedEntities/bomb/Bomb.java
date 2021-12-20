@@ -101,7 +101,7 @@ public class Bomb extends AnimatedEntity {
         }
 
         g2.drawImage(sprite.getImage(), x, y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
-        g2.draw(bounds);
+//        g2.draw(bounds);
     }
 
     @Override
