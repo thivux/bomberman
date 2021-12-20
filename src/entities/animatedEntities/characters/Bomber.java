@@ -10,7 +10,7 @@ import level.Board;
 
 import java.awt.*;
 
-public class Bomber extends Characters {
+public class Bomber extends Character {
     private final Keyboard keyboard;
     private int numberOfBombs = 0;
     private int timeBetweenBombs = 0; // no bomb when start

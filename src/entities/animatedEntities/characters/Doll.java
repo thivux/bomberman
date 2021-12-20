@@ -5,9 +5,8 @@ import gui.GamePanel;
 import level.Board;
 
 import java.awt.*;
-import java.util.Random;
 
-public class Doll extends Characters {
+public class Doll extends Enemy {
     public Doll(int x, int y, Board board) {
         super(x, y, board);
         sprite = Sprite.doll_right1;
@@ -34,7 +33,7 @@ public class Doll extends Characters {
             }
 
         } else {
-            if(afterKill > 0) {
+            if (afterKill > 0) {
                 sprite = Sprite.doll_dead;
                 _animate = 0;
             } else { // final animation

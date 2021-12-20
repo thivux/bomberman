@@ -6,9 +6,8 @@ import gui.GamePanel;
 import level.Board;
 
 import java.awt.*;
-import java.util.Random;
 
-public class Ballom extends Characters {
+public class Ballom extends Enemy {
 
     public Ballom(int x, int y, Board board) {
         super(x, y, board);
