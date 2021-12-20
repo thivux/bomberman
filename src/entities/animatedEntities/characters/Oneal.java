@@ -6,9 +6,8 @@ import gui.GamePanel;
 import level.Board;
 
 import java.awt.*;
-import java.util.Random;
 
-public class Oneal extends Characters {
+public class Oneal extends Enemy {
     public static final int RANGE = 4;
 
     public Oneal(int x, int y, Board board) {
@@ -38,7 +37,7 @@ public class Oneal extends Characters {
             }
 
         } else {
-            if(afterKill > 0) {
+            if (afterKill > 0) {
                 sprite = Sprite.oneal_dead;
                 _animate = 0;
             } else { // final animation

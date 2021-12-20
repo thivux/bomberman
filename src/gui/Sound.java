@@ -6,8 +6,8 @@ import javax.sound.sampled.Clip;
 import java.io.File;
 
 public class Sound {
-    Clip clip;
-    File[] soundURL = new File[30];
+    private Clip clip;
+    private File[] soundURL = new File[30];
 
     public Sound() {
         soundURL[0] = new File("res\\sound\\theme.wav");
@@ -34,11 +34,11 @@ public class Sound {
     public void play() {
         clip.start();
     }
-    
+
     public void loop() {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
-    
+
     public void stop() {
         clip.stop();
     }

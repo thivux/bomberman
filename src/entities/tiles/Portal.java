@@ -8,7 +8,7 @@ import level.Board;
 import java.awt.*;
 
 public class Portal extends Tile {
-    private Board board;
+    private final Board board;
 
     public Portal(int x, int y, Board board) {
         super(x, y);
